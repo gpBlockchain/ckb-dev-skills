@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Node (if testing CCC SDK examples)
+node_modules/
+npm-debug.log*
+
+# Rust (if testing Script examples)
+target/
+Cargo.lock
+
+# Environment
+.env
+.env.local
