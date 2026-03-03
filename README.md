@@ -1,6 +1,6 @@
 # CKB Development Skill for AI
 
-A comprehensive Vibe coding skill for Nervos CKB development (CKB2023 MIRANA best practices).
+A comprehensive Vibe coding skill and best practices for Nervos CKB development (CKB2023 MIRANA, to date of March 2026).
 
 ## Overview
 
@@ -39,14 +39,13 @@ skill/
 ├── SKILL.md                 # Main skill definition (required)
 ├── cell-model.md            # Cell Model basics
 ├── script.md                # Script structure & types
-├── transaction.md           # Transaction structure
-├── ckb-vm.md                # CKB-VM, cycles, syscalls
-├── rust-setup.md            # Rust environment setup
-├── writing-scripts-rust.md  # Writing Scripts in Rust
-├── other-languages.md       # C, JS, Lua options
-├── ccc-sdk.md               # CCC SDK for DApp development
-├── transaction-patterns.md  # Transaction composition patterns
-├── token-standards.md       # sUDT, xUDT, RGB++
+	├── transaction.md           # Transaction structure
+	├── ckb-vm.md                # CKB-VM, cycles, syscalls
+	├── rust-setup.md            # Rust environment setup
+	├── writing-scripts.md       # Writing Scripts (Rust/C first)
+	├── ccc-sdk.md               # CCC SDK for DApp development
+	├── transaction-patterns.md  # Transaction composition patterns
+	├── token-standards.md       # sUDT, xUDT, RGB++
 ├── testing.md               # Testing Scripts
 ├── debugging.md             # Debugging Scripts
 ├── deployment.md            # Deployment & tools

@@ -85,3 +85,6 @@ done
 echo ""
 echo "The skill is now available in Claude Code."
 echo "Try asking about CKB development to activate it!"
+echo ""
+echo "Using another AI agent? Point it at this folder (or link/symlink it):"
+echo "  $INSTALL_PATH"

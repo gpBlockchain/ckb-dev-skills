@@ -98,25 +98,26 @@ type: {
 
 The Type ID Script ensures only one Cell with a given type ID can exist at any time.
 
-## Capsule: Script Development Framework
+## ckb-script-templates: Script Project Scaffolding (recommended)
 
-[Capsule](https://github.com/nervosnetwork/capsule) is an out-of-the-box development framework for CKB Scripts supporting Rust, C, and Lua:
+For new script projects, use [ckb-script-templates](https://github.com/cryptape/ckb-script-templates) (cargo-generate templates). It is the current recommended workflow for Rust-based on-chain scripts.
 
 ```bash
-# Install capsule
-cargo install ckb-capsule
+cargo install cargo-generate
 
-# Create a new project
-capsule new my-project
+# Create a workspace
+cargo generate gh:cryptape/ckb-script-templates workspace --name my-ckb-contracts
+cd my-ckb-contracts
 
-# Build scripts
-capsule build
+# Generate a contract crate
+make generate CRATE=my-contract
 
-# Run tests
-capsule test
+# Build + test
+make build
+make test
 ```
 
-Note: For new Rust-only projects, `ckb-script-templates` (via `cargo generate`) is the recommended approach. Capsule remains useful for multi-language projects and provides integrated testing via `ckb-testtool`.
+Legacy note: [Capsule](https://github.com/nervosnetwork/capsule) exists, but we do not recommend starting new projects with it.
 
 ## Running a CKB Node
 

@@ -34,7 +34,8 @@
 - [ckb-lua](https://github.com/nervosnetwork/ckb-lua) — Lua support for CKB Scripts
 
 ### Frameworks
-- [Capsule](https://github.com/nervosnetwork/capsule) — Out-of-the-box development framework for CKB Scripts (Rust/C/Lua)
+- [ckb-script-templates](https://github.com/cryptape/ckb-script-templates) — Recommended project scaffolding (cargo-generate)
+- [Capsule](https://github.com/nervosnetwork/capsule) — Legacy framework (not recommended for new projects)
 
 ## DApp Development
 - [CCC SDK](https://github.com/ckb-devrel/ccc) — CKBers' Codebase, the primary JS/TS SDK
