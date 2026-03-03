@@ -63,21 +63,38 @@ async function deployScript(
 
 ### Via CKB-CLI
 
+The most reproducible way to deploy and upgrade contract binaries is `ckb-cli deploy` (deployment config + migrations).
+Reference: https://github.com/nervosnetwork/ckb-cli/wiki/Deploy-contracts
+
 ```bash
-# Deploy a script binary
+# Initialize a deployment config
+ckb-cli deploy init-config --deployment-config deployment.toml
+
+# Edit deployment.toml (cells/dep_groups/lock), then generate txs
 ckb-cli deploy gen-txs \
   --deployment-config deployment.toml \
   --migration-dir migrations \
+  --from-address <address> \
   --info-file deploy-info.json
 
+# If you did not use --sign-now, sign separately
 ckb-cli deploy sign-txs \
   --from-account <address> \
   --info-file deploy-info.json
 
+# Send txs to chain
 ckb-cli deploy apply-txs \
   --info-file deploy-info.json \
   --migration-dir migrations
+
+# After apply-txs, make sure the chain confirms them (on dev chains you may need to start mining)
 ```
+
+Notes:
+
+- `deployment.toml` supports both local binaries (`location = { file = "..." }`) and on-chain references (`location = { tx_hash = "0x...", index = N }`).
+- Use `dep_groups` to bundle frequently-used deps (e.g. omni_lock + secp256k1_data).
+- Enabling Type ID keeps the same reference identity across upgrades.
 
 ## Type ID for Upgradable Scripts
 
