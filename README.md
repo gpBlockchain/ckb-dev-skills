@@ -42,7 +42,7 @@ skill/
 	├── transaction.md           # Transaction structure
 	├── ckb-vm.md                # CKB-VM, cycles, syscalls
 	├── rust-setup.md            # Rust environment setup
-	├── writing-scripts.md       # Writing Scripts (Rust/C first)
+	├── writing-scripts.md       # Writing Scripts (authoritative links)
 	├── ccc-sdk.md               # CCC SDK for DApp development
 	├── transaction-patterns.md  # Transaction composition patterns
 	├── token-standards.md       # sUDT, xUDT, RGB++

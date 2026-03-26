@@ -97,7 +97,7 @@ When you implement changes, provide:
 - Transaction structure: [transaction.md](transaction.md)
 - CKB-VM, cycles, syscalls: [ckb-vm.md](ckb-vm.md)
 - Rust environment setup: [rust-setup.md](rust-setup.md)
-- Writing Scripts (Rust/C first): [writing-scripts.md](writing-scripts.md)
+- Writing Scripts (authoritative links): [writing-scripts.md](writing-scripts.md)
 - CCC SDK (DApp development): [ccc-sdk.md](ccc-sdk.md)
 - Transaction composition patterns: [transaction-patterns.md](transaction-patterns.md)
 - Token standards (sUDT, xUDT, RGB++): [token-standards.md](token-standards.md)
