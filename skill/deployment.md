@@ -6,15 +6,16 @@ This skill covers deploying Scripts to CKB networks and the key development tool
 
 ## CKB Networks
 
-| Network | Purpose | RPC Endpoint |
-|---------|---------|--------------|
-| Mainnet (MIRANA) | Production | https://mainnet.ckbapp.dev/rpc |
-| Testnet (PUDGE) | Testing | https://testnet.ckbapp.dev/rpc |
-| Devnet | Local development | http://localhost:8114 |
+| Network          | Purpose           | RPC Endpoint                   |
+| ---------------- | ----------------- | ------------------------------ |
+| Mainnet (MIRANA) | Production        | https://mainnet.ckbapp.dev/rpc |
+| Testnet (PUDGE)  | Testing           | https://testnet.ckbapp.dev/rpc |
+| Devnet           | Local development | http://localhost:8114          |
 
 ## Testnet Faucet
 
 Before developing, claim testnet CKB tokens:
+
 - **Faucet**: https://faucet.nervos.org/
 
 ## OffCKB: Local Development Environment
@@ -38,10 +39,7 @@ OffCKB comes with pre-deployed system Scripts and funded accounts for immediate 
 ```typescript
 import { ccc } from "@ckb-ccc/shell";
 
-async function deployScript(
-  signer: ccc.Signer,
-  scriptBinary: Uint8Array
-) {
+async function deployScript(signer: ccc.Signer, scriptBinary: Uint8Array) {
   const tx = ccc.Transaction.from({
     outputs: [
       {
@@ -139,6 +137,7 @@ Legacy note: [Capsule](https://github.com/nervosnetwork/capsule) exists, but we 
 ## Running a CKB Node
 
 For full node operation (beyond local Devnet):
+
 - [CKB Node Running Tutorials](https://linktr.ee/nodeckb) — Guides for running your own node
 - [CKB Node Probe](https://nodes.ckb.dev/) — Monitor CKB node status online
 - [Find Your Node ID](https://nodes.ckb.dev/findNode)
@@ -190,17 +189,18 @@ curl -X POST https://testnet.ckbapp.dev/rpc \
 
 ### SDKs by Language
 
-| Language | SDK | Link |
-|----------|-----|------|
-| TypeScript/JavaScript | CCC | https://github.com/ckb-devrel/ccc |
-| TypeScript/JavaScript | Lumos | https://github.com/ckb-js/lumos |
-| Rust | ckb-sdk-rust | https://github.com/nervosnetwork/ckb-sdk-rust |
-| Go | ckb-sdk-go | https://github.com/nervosnetwork/ckb-sdk-go |
-| Java | ckb-sdk-java | https://github.com/nervosnetwork/ckb-sdk-java |
+| Language              | SDK          | Link                                          |
+| --------------------- | ------------ | --------------------------------------------- |
+| TypeScript/JavaScript | CCC          | https://github.com/ckb-devrel/ccc             |
+| TypeScript/JavaScript | Lumos        | https://github.com/ckb-js/lumos               |
+| Rust                  | ckb-sdk-rust | https://github.com/nervosnetwork/ckb-sdk-rust |
+| Go                    | ckb-sdk-go   | https://github.com/nervosnetwork/ckb-sdk-go   |
+| Java                  | ckb-sdk-java | https://github.com/nervosnetwork/ckb-sdk-java |
 
 ### Molecule (Serialization)
 
 CKB uses Molecule for binary serialization (not Protobuf/JSON). Key characteristics:
+
 - Zero-copy deserialization
 - Schema-based
 - Deterministic encoding

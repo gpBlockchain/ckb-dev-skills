@@ -56,6 +56,7 @@ Fiber Network Node (FNN) is the reference node implementation:
 ## Running a Fiber Node
 
 ### Prerequisites
+
 - Rust and Cargo (if building from source)
 - `ckb-cli` for key management
 - CKB testnet tokens from [faucet](https://faucet.nervos.org/)
@@ -89,6 +90,7 @@ FIBER_SECRET_KEY_PASSWORD='your_password' RUST_LOG=info ./fnn -c config.yml -d .
 ```
 
 ### Detailed Guide
+
 - [Run a Fiber Node](https://docs.fiber.world/docs/quick-start/run-a-node) — Full setup walkthrough
 
 ## Basic Payment Flow
@@ -190,18 +192,18 @@ curl -s -X POST http://localhost:8227 \
 
 ## Key RPC Methods
 
-| Method | Description |
-|--------|-------------|
-| `connect_peer` | Connect to another Fiber node |
-| `disconnect_peer` | Disconnect from a peer |
-| `open_channel` | Open a payment channel with funding |
-| `accept_channel` | Accept a channel open request (auto by default) |
-| `list_channels` | List all channels and their states |
-| `shutdown_channel` | Cooperatively close a channel |
-| `new_invoice` | Create a payment invoice (receiver) |
-| `parse_invoice` | Decode an invoice string |
-| `send_payment` | Send payment using an invoice |
-| `get_payment` | Check payment status |
+| Method             | Description                                     |
+| ------------------ | ----------------------------------------------- |
+| `connect_peer`     | Connect to another Fiber node                   |
+| `disconnect_peer`  | Disconnect from a peer                          |
+| `open_channel`     | Open a payment channel with funding             |
+| `accept_channel`   | Accept a channel open request (auto by default) |
+| `list_channels`    | List all channels and their states              |
+| `shutdown_channel` | Cooperatively close a channel                   |
+| `new_invoice`      | Create a payment invoice (receiver)             |
+| `parse_invoice`    | Decode an invoice string                        |
+| `send_payment`     | Send payment using an invoice                   |
+| `get_payment`      | Check payment status                            |
 
 Full RPC reference: https://github.com/nervosnetwork/fiber/blob/v0.7.1/crates/fiber-lib/src/rpc/README.md
 
@@ -229,6 +231,7 @@ Guide: [Transfer Stablecoins](https://docs.fiber.world/docs/quick-start/transfer
 ## Cross-Network Interoperability
 
 Fiber Network can interoperate with Bitcoin Lightning Network:
+
 - **Edge nodes** bridge the two networks, enabling cross-chain atomic swaps
 - Users can pay from Lightning to Fiber and vice versa
 - RGB++ stablecoins can enter the "Hybrid Lightning Network"
@@ -264,12 +267,14 @@ Features: node lifecycle management, channel management, invoice/payment flows, 
 FNN is under active development. Protocol and storage format may change between versions.
 
 **Safe upgrade process:**
+
 1. Close all channels via `shutdown_channel` RPC
 2. Stop the node
 3. Remove storage: `rm -rf /path/to/my-fnn/fiber/store`
 4. Replace binary and restart
 
 **With state migration** (optional):
+
 ```bash
 # Backup first
 cp -r /path/to/my-fnn/fiber/store /path/to/my-fnn/fiber/store.backup

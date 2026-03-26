@@ -125,15 +125,17 @@ pnpm create ccc-app my-ccc-app
 ### fixedPointFrom
 
 CCC uses fixed-point numbers for CKB amounts:
+
 ```typescript
-ccc.fixedPointFrom("100")     // 100 CKB
-ccc.fixedPointFrom(100)       // 100 CKB
-ccc.fixedPointFrom("0.5")     // 0.5 CKB
+ccc.fixedPointFrom("100"); // 100 CKB
+ccc.fixedPointFrom(100); // 100 CKB
+ccc.fixedPointFrom("0.5"); // 0.5 CKB
 ```
 
 ### Transaction Completion
 
 CCC's killer feature is automatic transaction completion:
+
 - `tx.completeInputsByCapacity(signer)` - Automatically selects enough input Cells.
 - `tx.completeFeeBy(signer)` - Automatically calculates and adds the transaction fee.
 - `tx.completeFeeChangeToOutput(signer, index)` - Adds fee change to a specific output.
@@ -155,9 +157,7 @@ function WalletButton() {
   const { open, wallet, signer } = ccc.useCcc();
 
   return (
-    <button onClick={open}>
-      {wallet ? wallet.name : "Connect Wallet"}
-    </button>
+    <button onClick={open}>{wallet ? wallet.name : "Connect Wallet"}</button>
   );
 }
 ```
@@ -173,6 +173,7 @@ function WalletButton() {
 ## Lumos Compatibility
 
 If migrating from Lumos, CCC provides patches:
+
 ```bash
 npm install @ckb-ccc/lumos-patches
 ```
@@ -186,21 +187,22 @@ registerCustomLockScriptInfos(generateDefaultScriptInfos());
 
 CCC supports connecting to multiple CKB wallets via its connector. The CKB ecosystem has a rich set of wallets:
 
-| Wallet | Platform | Lock Type | Notes |
-|--------|----------|-----------|-------|
-| Neuron | Desktop (Win/Mac/Linux) | secp256k1 | Full node wallet |
-| CKBull | Mobile (Android/iOS) | secp256k1 | Mobile wallet |
-| JoyID | Web | secp256r1 (PassKey) | Uses WebAuthn/Passkeys via [JoyID Lock](https://docs.joyid.dev/guide/sdk) |
-| Portal Wallet | Web | Omnilock | Web wallet |
-| Rei Wallet | Browser Extension | secp256k1 | [Docs](https://docs.reiwallet.io), [Demo](https://demo-app.reiwallet.io/) |
-| SafePal | Hardware/Mobile | secp256k1 | Hardware wallet |
-| Ledger | Hardware | secp256k1 | Hardware wallet |
-| imToken | Mobile (Android/iOS) | secp256k1 | Multi-chain |
-| OneKey | Desktop/Mobile/Extension | secp256k1 | Multi-chain |
+| Wallet        | Platform                 | Lock Type           | Notes                                                                     |
+| ------------- | ------------------------ | ------------------- | ------------------------------------------------------------------------- |
+| Neuron        | Desktop (Win/Mac/Linux)  | secp256k1           | Full node wallet                                                          |
+| CKBull        | Mobile (Android/iOS)     | secp256k1           | Mobile wallet                                                             |
+| JoyID         | Web                      | secp256r1 (PassKey) | Uses WebAuthn/Passkeys via [JoyID Lock](https://docs.joyid.dev/guide/sdk) |
+| Portal Wallet | Web                      | Omnilock            | Web wallet                                                                |
+| Rei Wallet    | Browser Extension        | secp256k1           | [Docs](https://docs.reiwallet.io), [Demo](https://demo-app.reiwallet.io/) |
+| SafePal       | Hardware/Mobile          | secp256k1           | Hardware wallet                                                           |
+| Ledger        | Hardware                 | secp256k1           | Hardware wallet                                                           |
+| imToken       | Mobile (Android/iOS)     | secp256k1           | Multi-chain                                                               |
+| OneKey        | Desktop/Mobile/Extension | secp256k1           | Multi-chain                                                               |
 
 ### Omnilock: Universal Lock for Wallet Interop
 
 [Omnilock](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0042-omnilock/0042-omnilock.md) is a universal Lock Script that supports multiple authentication methods in a single Script:
+
 - secp256k1 (CKB native, Bitcoin, Ethereum)
 - secp256r1 (WebAuthn, passkeys)
 - Multi-sig

@@ -42,6 +42,7 @@ ckb-debugger --mode gdb --gdb-listen 127.0.0.1:9999 --bin build/release/my-contr
 ```
 
 In another terminal:
+
 ```bash
 # Connect with GDB (need riscv64 GDB)
 riscv64-unknown-elf-gdb build/release/my-contract.debug
@@ -63,16 +64,16 @@ ckb-debugger --mode fast --bin build/release/my-contract --pprof output.pprof
 
 ## Common Error Codes
 
-| Code | Meaning | Common Cause |
-|------|---------|--------------|
-| -1 | Script returns -1 | Explicit validation failure in your code |
-| -2 | Exceed maximum cycles | Script computation exceeds limit |
-| 1 | IndexOutOfBound | Accessing Cell at invalid index |
-| 2 | ItemMissing | Expected data not found |
-| 3 | LengthNotEnough | Buffer too small for data |
-| 4 | Encoding | Molecule deserialization error |
-| -52 | Invalid Witness | Witness format incorrect |
-| -31 | Signature Verification Error | Wrong signature or wrong public key |
+| Code | Meaning                      | Common Cause                             |
+| ---- | ---------------------------- | ---------------------------------------- |
+| -1   | Script returns -1            | Explicit validation failure in your code |
+| -2   | Exceed maximum cycles        | Script computation exceeds limit         |
+| 1    | IndexOutOfBound              | Accessing Cell at invalid index          |
+| 2    | ItemMissing                  | Expected data not found                  |
+| 3    | LengthNotEnough              | Buffer too small for data                |
+| 4    | Encoding                     | Molecule deserialization error           |
+| -52  | Invalid Witness              | Witness format incorrect                 |
+| -31  | Signature Verification Error | Wrong signature or wrong public key      |
 
 ## Common Debugging Scenarios
 
@@ -102,6 +103,7 @@ Fix: Ensure the Cell containing the Script binary is included in `cell_deps`.
 
 Symptom: Script execution fails with unexpected code.
 Fix: Verify `hash_type` matches how the Script was deployed:
+
 - `data`/`data1`/`data2`: `code_hash` = hash of Script binary
 - `type`: `code_hash` = hash of the deploying Cell's Type Script
 

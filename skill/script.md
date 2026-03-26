@@ -16,18 +16,18 @@ pub struct Script {
 
 ### Fields Explained
 
-| Field | Description |
-|-------|-------------|
-| `code_hash` | Identifies which Script code to load and execute |
-| `hash_type` | Defines how to interpret `code_hash` when locating code |
-| `args` | Custom arguments passed to the Script (e.g., public key hash) |
+| Field       | Description                                                   |
+| ----------- | ------------------------------------------------------------- |
+| `code_hash` | Identifies which Script code to load and execute              |
+| `hash_type` | Defines how to interpret `code_hash` when locating code       |
+| `args`      | Custom arguments passed to the Script (e.g., public key hash) |
 
 ### hash_type Values
 
-| Value | Name | Description |
-|-------|------|-------------|
+| Value                    | Name      | Description                                  |
+| ------------------------ | --------- | -------------------------------------------- |
 | `data`, `data1`, `data2` | Data Hash | Match the hash of the Script binary directly |
-| `type` | Type Hash | Match the hash of a Cell's Type Script |
+| `type`                   | Type Hash | Match the hash of a Cell's Type Script       |
 
 ## Two Types of Scripts
 
@@ -47,6 +47,7 @@ pub struct Script {
 ## Script Execution Rules
 
 In a transaction:
+
 - Input Cells' **Lock Scripts** are executed.
 - Input Cells' **Type Scripts** are executed (if present).
 - Output Cells' **Type Scripts** are executed (if present).
@@ -57,6 +58,7 @@ Return code `0` = success. Any non-zero = failure (transaction rejected).
 ## Default Lock Script: secp256k1_blake160_sighash_all
 
 The most common Lock Script on CKB:
+
 1. Extracts the public key from the transaction witness.
 2. Hashes the public key with Blake2b to get a Blake160 hash.
 3. Compares with the hash stored in `args`.

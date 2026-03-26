@@ -17,6 +17,7 @@ npm-debug.log*
 # Rust (if testing Script examples)
 target/
 Cargo.lock
+.tools/
 
 # Environment
 .env

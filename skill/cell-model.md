@@ -31,6 +31,7 @@ Cell: {
 ### Immutability
 
 Cells on-chain are immutable. To "update" a Cell:
+
 1. Consume the existing Cell as a transaction input.
 2. Create a new Cell as a transaction output with the updated data.
 

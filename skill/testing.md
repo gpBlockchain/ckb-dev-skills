@@ -3,6 +3,7 @@
 ## Overview
 
 CKB Scripts can be tested using two primary methods:
+
 1. **ckb-testtool**: Simulates a complete CKB environment in Rust unit tests.
 2. **ckb-debugger**: Runs Scripts from the command line with transaction data.
 
@@ -13,6 +14,7 @@ CKB Scripts can be tested using two primary methods:
 ### Setup
 
 In `tests/Cargo.toml`:
+
 ```toml
 [dependencies]
 ckb-testtool = "0.13"
@@ -153,16 +155,34 @@ ckb-debugger -f tests/test-vectors/my_test.json
   "mock_info": {
     "inputs": [
       {
-        "input": { "since": "0x0", "previous_output": { "tx_hash": "0x...", "index": "0x0" } },
-        "output": { "capacity": "0x3e8", "lock": { "code_hash": "0x...", "hash_type": "type", "args": "0x..." }, "type": null },
+        "input": {
+          "since": "0x0",
+          "previous_output": { "tx_hash": "0x...", "index": "0x0" }
+        },
+        "output": {
+          "capacity": "0x3e8",
+          "lock": {
+            "code_hash": "0x...",
+            "hash_type": "type",
+            "args": "0x..."
+          },
+          "type": null
+        },
         "data": "0x",
         "header": null
       }
     ],
     "cell_deps": [
       {
-        "cell_dep": { "out_point": { "tx_hash": "0x...", "index": "0x0" }, "dep_type": "code" },
-        "output": { "capacity": "0x...", "lock": { "code_hash": "0x...", "hash_type": "data", "args": "0x" }, "type": null },
+        "cell_dep": {
+          "out_point": { "tx_hash": "0x...", "index": "0x0" },
+          "dep_type": "code"
+        },
+        "output": {
+          "capacity": "0x...",
+          "lock": { "code_hash": "0x...", "hash_type": "data", "args": "0x" },
+          "type": null
+        },
         "data": "0x<script binary hex>",
         "header": null
       }
@@ -172,10 +192,26 @@ ckb-debugger -f tests/test-vectors/my_test.json
   },
   "tx": {
     "version": "0x0",
-    "cell_deps": [{ "out_point": { "tx_hash": "0x...", "index": "0x0" }, "dep_type": "code" }],
+    "cell_deps": [
+      {
+        "out_point": { "tx_hash": "0x...", "index": "0x0" },
+        "dep_type": "code"
+      }
+    ],
     "header_deps": [],
-    "inputs": [{ "since": "0x0", "previous_output": { "tx_hash": "0x...", "index": "0x0" } }],
-    "outputs": [{ "capacity": "0x1f4", "lock": { "code_hash": "0x...", "hash_type": "type", "args": "0x" }, "type": null }],
+    "inputs": [
+      {
+        "since": "0x0",
+        "previous_output": { "tx_hash": "0x...", "index": "0x0" }
+      }
+    ],
+    "outputs": [
+      {
+        "capacity": "0x1f4",
+        "lock": { "code_hash": "0x...", "hash_type": "type", "args": "0x" },
+        "type": null
+      }
+    ],
     "outputs_data": ["0x"],
     "witnesses": []
   }

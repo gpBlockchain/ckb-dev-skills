@@ -1,0 +1,11 @@
+max_concurrency = 1
+max_retries = 4
+retry_wait_time = 10
+timeout = 30
+accept = [200, 206, 403, 429]
+user_agent = "Mozilla/5.0 (compatible; ckb-dev-skills-link-check)"
+exclude_loopback = true
+
+exclude = [
+  "^https://discord\\.com/channels/",
+]

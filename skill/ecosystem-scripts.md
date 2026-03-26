@@ -17,6 +17,7 @@ args: <20-byte blake160 of public key>
 ```
 
 **How it works:**
+
 1. Extracts public key from witness signature.
 2. Hashes public key with Blake2b-256, takes first 20 bytes (Blake160).
 3. Compares with `args`.
@@ -67,6 +68,7 @@ args: <auth content (21 bytes)> [omnilock args flags and fields]
 ```
 
 **Supported auth methods:**
+
 - **secp256k1** (CKB native, Bitcoin, Ethereum addresses)
 - **secp256r1** (WebAuthn, passkeys — used by JoyID)
 - **Multi-sig** (M-of-N threshold)
@@ -74,6 +76,7 @@ args: <auth content (21 bytes)> [omnilock args flags and fields]
 - **ckb-auth** integration (any algorithm ckb-auth supports)
 
 **Optional features** (via flags in args):
+
 - **Supply lock**: Limit token supply
 - **Time lock**: Cells cannot be spent until after a certain time
 - **ACP (Anyone-Can-Pay)**: Accept deposits from anyone
@@ -81,6 +84,7 @@ args: <auth content (21 bytes)> [omnilock args flags and fields]
 **Why Omnilock matters**: It enables CKB DApps to accept users from virtually any wallet ecosystem (Ethereum, Bitcoin, WebAuthn, etc.) through a single Lock Script, rather than deploying separate Scripts for each auth method.
 
 **References:**
+
 - [Omnilock RFC](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0042-omnilock/0042-omnilock.md)
 - [Omnilock Introduction (Blog)](https://blog.cryptape.com/omnilock-a-universal-lock-that-powers-interoperability-1)
 
@@ -99,6 +103,7 @@ A specialized Lock Script for [JoyID](https://docs.joyid.dev/guide/sdk) wallet, 
 ### ckb-auth
 
 A universal authentication library Script that supports multiple signature algorithms:
+
 - secp256k1 (Bitcoin, Ethereum)
 - secp256r1 (WebAuthn, passkeys)
 - Schnorr (Bitcoin Taproot)
@@ -116,6 +121,7 @@ When using these Scripts, you need to:
 2. **Include the code Cell** in `cell_deps`.
 
 Example with CCC:
+
 ```typescript
 // The lock script auto-uses secp256k1_blake160_sighash_all
 const signer = new ccc.SignerCkbPrivateKey(client, privateKey);

@@ -30,7 +30,7 @@ const txHash = await signer.sendTransaction(tx);
 async function transferCKB(
   signer: ccc.Signer,
   toAddress: string,
-  amountCKB: string
+  amountCKB: string,
 ) {
   const client = signer.client;
   const toLock = (await ccc.Address.fromString(toAddress, client)).script;
@@ -107,7 +107,7 @@ const tx = ccc.Transaction.from({
   outputs: [
     {
       lock: recipientLock,
-      type: udtTypeScript,  // The UDT type script
+      type: udtTypeScript, // The UDT type script
       capacity: ccc.fixedPointFrom("142"), // Enough for Cell overhead
     },
   ],

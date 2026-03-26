@@ -23,11 +23,11 @@ Cycles measure the computational cost of executing a Script. Each VM instruction
 
 CKB-VM has evolved through multiple versions:
 
-| Version | hash_type | Description |
-|---------|-----------|-------------|
-| VM 0 | `data` | Original VM |
-| VM 1 | `data1` | Added VM version 1 features |
-| VM 2 | `data2`, `type` | Added Spawn syscall, improved performance |
+| Version | hash_type       | Description                               |
+| ------- | --------------- | ----------------------------------------- |
+| VM 0    | `data`          | Original VM                               |
+| VM 1    | `data1`         | Added VM version 1 features               |
+| VM 2    | `data2`, `type` | Added Spawn syscall, improved performance |
 
 Use `data2` or `type` hash_type to target the latest VM version (VM 2).
 
@@ -36,6 +36,7 @@ Use `data2` or `type` hash_type to target the latest VM version (VM 2).
 Scripts interact with the blockchain through syscalls -- special functions that read transaction data, Cell data, and more.
 
 Common syscalls:
+
 - `ckb_load_script()` - Load the current Script
 - `ckb_load_cell_data()` - Load data from a Cell
 - `ckb_load_witness()` - Load witness data

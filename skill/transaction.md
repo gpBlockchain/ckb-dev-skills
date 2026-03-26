@@ -20,13 +20,13 @@ Transaction: {
 
 ### Key Fields
 
-| Field | Description |
-|-------|-------------|
-| `cell_deps` | References to Cells containing Script code or data needed during execution. These Cells are NOT consumed. |
-| `inputs` | Live Cells to be consumed. Each references a previous transaction output. |
-| `outputs` | New Cells to be created. Each specifies capacity, lock, and optional type. |
-| `outputs_data` | Data field for each corresponding output Cell (matched by index). |
-| `witnesses` | Proofs (typically signatures) used by Scripts during validation. |
+| Field          | Description                                                                                               |
+| -------------- | --------------------------------------------------------------------------------------------------------- |
+| `cell_deps`    | References to Cells containing Script code or data needed during execution. These Cells are NOT consumed. |
+| `inputs`       | Live Cells to be consumed. Each references a previous transaction output.                                 |
+| `outputs`      | New Cells to be created. Each specifies capacity, lock, and optional type.                                |
+| `outputs_data` | Data field for each corresponding output Cell (matched by index).                                         |
+| `witnesses`    | Proofs (typically signatures) used by Scripts during validation.                                          |
 
 ## Transaction Flow
 
@@ -47,6 +47,7 @@ There is no explicit gas/fee field. The difference between total input and outpu
 ## cell_deps
 
 `cell_deps` point to Cells that contain data needed during Script execution but are NOT consumed:
+
 - Script code binaries (e.g., the secp256k1 Lock Script binary)
 - Shared libraries or lookup data
 
@@ -56,7 +57,7 @@ There is no explicit gas/fee field. The difference between total input and outpu
     "tx_hash": "0x...",
     "index": "0x0"
   },
-  "dep_type": "code"  // "code" or "dep_group"
+  "dep_type": "code" // "code" or "dep_group"
 }
 ```
 

@@ -29,6 +29,7 @@ type: {
 The `args` field contains the owner's lock script hash. Only the owner can issue (mint) new tokens. Anyone can transfer existing tokens.
 
 ### Rules
+
 - **Mint**: Only the owner (whose lock script hash matches `args`) can create new sUDT Cells.
 - **Transfer**: Total input sUDT amount >= Total output sUDT amount (for the same type script).
 
@@ -45,12 +46,14 @@ A protocol for creating unique digital objects on CKB. Part of the [DOB Protocol
 - **DOB/0 Protocol Spec**: https://docs.spore.pro/dob/dob0-protocol
 
 ### Features
+
 - On-chain content storage (not just a URI like ERC-721)
 - Content type detection
 - Immutable or mutable (with cluster ownership)
 - Built-in royalty and ownership
 
 ### Getting Started
+
 - [Getting Started with Spore](https://docs.spore.pro/category/get-started)
 - [Create Your First Spore](https://docs.spore.pro/tutorials/create-first-spore/)
 - [Creating an On-Chain Blog Using Spore](https://docs.spore.pro/tutorials/create-on-chain-blog/)
@@ -58,6 +61,7 @@ A protocol for creating unique digital objects on CKB. Part of the [DOB Protocol
 - [Spore Glossary](https://docs.spore.pro/category/glossary)
 
 ### Examples
+
 - [Spore Demo](https://github.com/sporeprotocol/spore-demo) — Demo source code
 - [Philosopher's Stone](https://github.com/SpectreMercury/PhilosopherStone) — Full Spore application example
 
@@ -72,6 +76,7 @@ An extended RGB protocol that uses CKB as a verification layer for Bitcoin L1 as
 - **Contract Specs (CN)**: https://github.com/utxostack/RGBPlusPlus-design/blob/main/docs/lockscript-design-prd-cn.md
 
 ### How It Works
+
 1. Assets are issued on Bitcoin.
 2. State changes are verified on CKB.
 3. CKB's Turing-complete VM enables complex logic for Bitcoin-native assets.

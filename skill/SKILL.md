@@ -7,7 +7,9 @@ user-invocable: true
 # CKB Development Skill
 
 ## What this Skill is for
+
 Use this Skill when the user asks for:
+
 - CKB on-chain Script (smart contract) development
 - Cell Model and UTXO-style state management
 - Transaction building, signing, and sending on CKB
@@ -24,38 +26,46 @@ Use this Skill when the user asks for:
 
 ## Default stack decisions (opinionated)
 
-1) **Script language: Rust first**
+1. **Script language: Rust first**
+
 - Prefer Rust with `ckb-std` for all new on-chain Scripts.
 - Use C with `ckb-c-stdlib` only for extremely size/cycle-sensitive Scripts.
 - Use JavaScript (ckb-js-vm) for prototyping or educational demos.
 
-2) **DApp SDK: CCC first**
+2. **DApp SDK: CCC first**
+
 - Use `@ckb-ccc/shell` for Node.js backends.
 - Use `@ckb-ccc/connector-react` for React frontends with wallet connection.
 - Use `@ckb-ccc/ccc` for custom UI without built-in connector.
 
-3) **Script project scaffolding**
+3. **Script project scaffolding**
+
 - Use `cargo generate gh:cryptape/ckb-script-templates workspace` for new projects.
 - Use `make generate CRATE=<name>` to add contracts within a project.
 
-4) **Testing**
+4. **Testing**
+
 - Default: `ckb-testtool` for Rust unit tests (simulates full CKB environment).
 - Use `ckb-debugger` for command-line execution, cycle profiling, and GDB debugging.
 - Use `ckb-debugger --mode gdb` when you need step-through debugging.
 
-5) **Deployment**
+5. **Deployment**
+
 - Use OffCKB for local Devnet development.
 - Use Type ID pattern for upgradable Scripts.
 - Use `data2` hash_type for new Scripts (targets latest VM version).
 
-6) **Serialization**
+6. **Serialization**
+
 - CKB uses Molecule (not Protobuf/JSON) for on-chain data serialization.
 - Use `@ckb-ccc/ccc` codecs for TypeScript, `molecule` crate for Rust.
 
 ## Operating procedure (how to execute tasks)
+
 When solving a CKB task:
 
 ### 1. Classify the task layer
+
 - Core concepts (Cell Model, Script, Transaction structure)
 - On-chain Script development (Rust/C/JS)
 - DApp / client-side development (CCC SDK, wallet)
@@ -64,6 +74,7 @@ When solving a CKB task:
 - Deployment and infrastructure
 
 ### 2. Pick the right building blocks
+
 - Script development: Rust + ckb-std + ckb-script-templates
 - DApp client: CCC SDK (@ckb-ccc/shell or @ckb-ccc/connector-react)
 - Testing: ckb-testtool (Rust) + ckb-debugger (CLI)
@@ -71,7 +82,9 @@ When solving a CKB task:
 - Payment channels: Fiber Network (fnn node + JSON-RPC)
 
 ### 3. Implement with CKB-specific correctness
+
 Always be explicit about:
+
 - Cell capacity requirements (minimum 61 CKBytes, recommend 62+)
 - Lock Script vs Type Script distinction and execution rules
 - `cell_deps` inclusion for referenced Script code
@@ -80,18 +93,22 @@ Always be explicit about:
 - Transaction fee = sum(input capacities) - sum(output capacities)
 
 ### 4. Add tests
+
 - Script tests: ckb-testtool with both success and failure cases.
 - Transaction tests: verify cycle consumption is reasonable.
 - Use `context.dump_tx()` to generate ckb-debugger transaction files.
 
 ### 5. Deliverables expectations
+
 When you implement changes, provide:
+
 - Exact files changed
 - Commands to build (`make build`) and test (`make test`)
 - Cycle consumption estimates where relevant
 - Risk notes for anything touching signatures, token transfers, or capacity management
 
 ## Progressive disclosure (read when needed)
+
 - Cell Model basics: [cell-model.md](cell-model.md)
 - Script structure & types: [script.md](script.md)
 - Transaction structure: [transaction.md](transaction.md)

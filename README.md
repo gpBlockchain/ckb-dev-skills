@@ -93,17 +93,17 @@ Once installed, Claude Code will automatically use this skill when you ask about
 
 This skill encodes opinionated best practices:
 
-| Layer | Default Choice | Alternative |
-|-------|---------------|-------------|
-| Script Language | Rust + `ckb-std` | C (`ckb-c-stdlib`), JS (`ckb-js-vm`) |
-| DApp SDK | CCC (`@ckb-ccc/shell`) | CCC React (`@ckb-ccc/connector-react`) |
-| Project Scaffolding | `ckb-script-templates` | Manual setup |
-| Unit Testing | `ckb-testtool` | `ckb-debugger` CLI |
-| Debugging | `ckb-debugger` + GDB | Debug print via `ckb_debug!` |
-| Local Development | OffCKB | Manual CKB node |
-| Deployment | Type ID (upgradable) | Direct data deployment |
-| Serialization | Molecule | — |
-| Payment Channels | Fiber Network (fnn) | — |
+| Layer               | Default Choice         | Alternative                            |
+| ------------------- | ---------------------- | -------------------------------------- |
+| Script Language     | Rust + `ckb-std`       | C (`ckb-c-stdlib`), JS (`ckb-js-vm`)   |
+| DApp SDK            | CCC (`@ckb-ccc/shell`) | CCC React (`@ckb-ccc/connector-react`) |
+| Project Scaffolding | `ckb-script-templates` | Manual setup                           |
+| Unit Testing        | `ckb-testtool`         | `ckb-debugger` CLI                     |
+| Debugging           | `ckb-debugger` + GDB   | Debug print via `ckb_debug!`           |
+| Local Development   | OffCKB                 | Manual CKB node                        |
+| Deployment          | Type ID (upgradable)   | Direct data deployment                 |
+| Serialization       | Molecule               | —                                      |
+| Payment Channels    | Fiber Network (fnn)    | —                                      |
 
 ## Content Sources
 
@@ -120,6 +120,27 @@ This skill incorporates best practices from:
 ## Progressive Disclosure
 
 The skill uses Claude Code's progressive disclosure pattern. The main `SKILL.md` provides core guidance and operating procedures. Claude reads the specialized markdown files only when needed for specific tasks, keeping context usage efficient.
+
+## Quality Checks
+
+The repository includes a docs-focused CI workflow that checks:
+
+- Markdown links with Lychee
+- Spelling with CSpell
+- Markdown formatting with Prettier
+
+You can run the same checks locally with:
+
+```bash
+make docs-check
+```
+
+Useful shortcuts:
+
+- `make docs-format` — rewrite Markdown files with Prettier
+- `make docs-format-check` — verify Markdown formatting only
+- `make docs-spell` — run spelling checks only
+- `make docs-links` — run link checks only
 
 ## Contributing
 
