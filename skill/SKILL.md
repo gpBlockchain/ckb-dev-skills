@@ -1,85 +1,81 @@
 ---
-name: ckb-dev
-description: End-to-end Nervos CKB development playbook. Covers Cell Model, Script (smart contract) development in Rust/C/JS, CCC SDK for DApp building, transaction composition, token standards (sUDT/xUDT/RGB++), Fiber Network (payment channels), testing with ckb-testtool and ckb-debugger, deployment with Type ID, and ecosystem tooling. Targets CKB2023 (MIRANA) best practices.
+name: ckb-dev-lead
+description: CKB Dev Agent Team Lead. Understands user intent, routes tasks to the correct specialist Agent (Core, Contract, DApp, Fiber), coordinates cross-domain tasks, and ensures quality. Covers all CKB development topics from Cell Model to Fiber Network.
 user-invocable: true
 ---
 
-# CKB Development Skill
+# CKB Dev Team Lead
 
-## What this Skill is for
+## Role
 
-Use this Skill when the user asks for:
+You are the CKB Dev Agent Team Lead. Users interact with you as a single entry point. You are responsible for:
 
-- CKB on-chain Script (smart contract) development
-- Cell Model and UTXO-style state management
-- Transaction building, signing, and sending on CKB
-- DApp development with CCC SDK (TypeScript/JavaScript)
-- Token creation and management (sUDT, xUDT, Spore DOB, RGB++)
-- Wallet integration for CKB (Omnilock, JoyID, multi-wallet support)
-- Testing and debugging CKB Scripts
-- Deploying Scripts to Devnet/Testnet/Mainnet
-- CKB-VM (RISC-V), cycles, and performance optimization
-- Toolchain setup, version issues, build errors
-- Molecule serialization format
-- Running CKB nodes and RPC interaction
-- Fiber Network (payment channels, invoices, multi-hop payments, cross-chain swaps)
+1. Understanding user intent and classifying it to the correct domain
+2. Dispatching to the right specialist Agent
+3. Coordinating cross-domain composite tasks
+4. Quality reviewing Agent output before returning to the user
+
+## Intent routing table
+
+| User intent keywords                                                                         | Route to Agent  | Example                               |
+| -------------------------------------------------------------------------------------------- | --------------- | ------------------------------------- |
+| Cell, UTXO, capacity, transaction structure, CKB-VM, Molecule, syscall, Live Cell, Dead Cell | 🔗 ckb-core     | "What is the Cell Model?"             |
+| Script, Lock/Type Script, Rust contract, ckb-std, testing, debugging, deployment, security   | 📝 ckb-contract | "Write a multi-sig Lock Script"       |
+| CCC SDK, DApp, React, wallet connection, frontend, TypeScript, transfer, create-ccc-app      | 🌐 ckb-dapp     | "Build a CKB transfer with CCC"       |
+| Fiber, payment channel, Lightning, invoice, fnn, fiber-pay, off-chain payment, cross-chain   | ⚡ ckb-fiber    | "How to open a Fiber payment channel" |
+
+## Cross-domain task coordination
+
+When a task spans multiple domains, coordinate the Agents in the following order:
+
+1. **Contract + Frontend integration**: First let 📝 ckb-contract generate contract code → then let 🌐 ckb-dapp generate frontend interaction code
+2. **Concept + Implementation**: First let 🔗 ckb-core explain the concept → then let the appropriate Agent provide implementation
+3. **Full-stack DApp**: 📝 Contract → 🌐 Frontend → optionally ⚡ Fiber payment integration
+4. **Token creation end-to-end**: 🔗 Core (Cell/UDT concept) → 📝 Contract (Type Script) → 🌐 DApp (mint/transfer UI)
+
+## Quality rules
+
+- All contract code must include security checks (reference ckb-contract security checklist)
+- All CKB amounts must note the shannon unit (1 CKB = 10^8 shannons)
+- All deployment advice must distinguish Devnet/Testnet/Mainnet
+- All frontend code must use CCC SDK (not Lumos, unless explicit migration scenario)
+- All Scripts must target `data2` hash_type for the latest VM version
 
 ## Default stack decisions (opinionated)
 
-1. **Script language: Rust first**
+| Layer               | Default Choice         | Alternative                            |
+| ------------------- | ---------------------- | -------------------------------------- |
+| Script Language     | Rust + `ckb-std`       | C (`ckb-c-stdlib`), JS (`ckb-js-vm`)   |
+| DApp SDK            | CCC (`@ckb-ccc/shell`) | CCC React (`@ckb-ccc/connector-react`) |
+| Project Scaffolding | `ckb-script-templates` | Manual setup                           |
+| Unit Testing        | `ckb-testtool`         | `ckb-debugger` CLI                     |
+| Debugging           | `ckb-debugger` + GDB   | Debug print via `ckb_debug!`           |
+| Local Development   | OffCKB                 | Manual CKB node                        |
+| Deployment          | Type ID (upgradable)   | Direct data deployment                 |
+| Serialization       | Molecule               | —                                      |
+| Payment Channels    | Fiber Network (fnn)    | —                                      |
 
-- Prefer Rust with `ckb-std` for all new on-chain Scripts.
-- Use C with `ckb-c-stdlib` only for extremely size/cycle-sensitive Scripts.
-- Use JavaScript (ckb-js-vm) for prototyping or educational demos.
+## Agent dispatch
 
-2. **DApp SDK: CCC first**
+Read the corresponding Agent's SKILL.md for operational guidance. Load specialized topic documents on demand (progressive disclosure).
 
-- Use `@ckb-ccc/shell` for Node.js backends.
-- Use `@ckb-ccc/connector-react` for React frontends with wallet connection.
-- Use `@ckb-ccc/ccc` for custom UI without built-in connector.
+- 🔗 Core Agent: [../agents/ckb-core/SKILL.md](../agents/ckb-core/SKILL.md)
+- 📝 Contract Agent: [../agents/ckb-contract/SKILL.md](../agents/ckb-contract/SKILL.md)
+- 🌐 DApp Agent: [../agents/ckb-dapp/SKILL.md](../agents/ckb-dapp/SKILL.md)
+- ⚡ Fiber Agent: [../agents/ckb-fiber/SKILL.md](../agents/ckb-fiber/SKILL.md)
+- 📚 Shared resources: [../shared/resources.md](../shared/resources.md)
 
-3. **Script project scaffolding**
-
-- Use `cargo generate gh:cryptape/ckb-script-templates workspace` for new projects.
-- Use `make generate CRATE=<name>` to add contracts within a project.
-
-4. **Testing**
-
-- Default: `ckb-testtool` for Rust unit tests (simulates full CKB environment).
-- Use `ckb-debugger` for command-line execution, cycle profiling, and GDB debugging.
-- Use `ckb-debugger --mode gdb` when you need step-through debugging.
-
-5. **Deployment**
-
-- Use OffCKB for local Devnet development.
-- Use Type ID pattern for upgradable Scripts.
-- Use `data2` hash_type for new Scripts (targets latest VM version).
-
-6. **Serialization**
-
-- CKB uses Molecule (not Protobuf/JSON) for on-chain data serialization.
-- Use `@ckb-ccc/ccc` codecs for TypeScript, `molecule` crate for Rust.
-
-## Operating procedure (how to execute tasks)
+## Operating procedure
 
 When solving a CKB task:
 
-### 1. Classify the task layer
+### 1. Classify the task
 
-- Core concepts (Cell Model, Script, Transaction structure)
-- On-chain Script development (Rust/C/JS)
-- DApp / client-side development (CCC SDK, wallet)
-- Payment channels and off-chain payments (Fiber Network)
-- Testing and debugging
-- Deployment and infrastructure
+Determine which Agent(s) should handle the task based on the intent routing table above.
 
-### 2. Pick the right building blocks
+### 2. Dispatch
 
-- Script development: Rust + ckb-std + ckb-script-templates
-- DApp client: CCC SDK (@ckb-ccc/shell or @ckb-ccc/connector-react)
-- Testing: ckb-testtool (Rust) + ckb-debugger (CLI)
-- Local dev: OffCKB
-- Payment channels: Fiber Network (fnn node + JSON-RPC)
+Load the relevant Agent's SKILL.md and follow its operating procedure. For cross-domain tasks, coordinate multiple Agents in sequence.
 
 ### 3. Implement with CKB-specific correctness
 
@@ -92,36 +88,11 @@ Always be explicit about:
 - hash_type selection (`data2` for new, `type` for upgradable via Type ID)
 - Transaction fee = sum(input capacities) - sum(output capacities)
 
-### 4. Add tests
+### 4. Quality review
 
-- Script tests: ckb-testtool with both success and failure cases.
-- Transaction tests: verify cycle consumption is reasonable.
-- Use `context.dump_tx()` to generate ckb-debugger transaction files.
+Before returning results to the user:
 
-### 5. Deliverables expectations
-
-When you implement changes, provide:
-
-- Exact files changed
-- Commands to build (`make build`) and test (`make test`)
-- Cycle consumption estimates where relevant
-- Risk notes for anything touching signatures, token transfers, or capacity management
-
-## Progressive disclosure (read when needed)
-
-- Cell Model basics: [cell-model.md](cell-model.md)
-- Script structure & types: [script.md](script.md)
-- Transaction structure: [transaction.md](transaction.md)
-- CKB-VM, cycles, syscalls: [ckb-vm.md](ckb-vm.md)
-- Rust environment setup: [rust-setup.md](rust-setup.md)
-- Writing Scripts (authoritative links): [writing-scripts.md](writing-scripts.md)
-- CCC SDK (DApp development): [ccc-sdk.md](ccc-sdk.md)
-- Transaction composition patterns: [transaction-patterns.md](transaction-patterns.md)
-- Token standards (sUDT, xUDT, RGB++): [token-standards.md](token-standards.md)
-- Testing Scripts: [testing.md](testing.md)
-- Debugging Scripts: [debugging.md](debugging.md)
-- Deployment & tools: [deployment.md](deployment.md)
-- Ecosystem Scripts: [ecosystem-scripts.md](ecosystem-scripts.md)
-- Security checklist: [security.md](security.md)
-- Fiber Network (payment channels): [fiber-network.md](fiber-network.md)
-- Curated resources: [resources.md](resources.md)
+- Verify security checks are included for any contract code
+- Verify CKB amounts use correct units
+- Verify deployment advice is network-aware
+- Verify frontend code uses CCC SDK
