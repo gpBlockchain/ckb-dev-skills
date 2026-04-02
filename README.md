@@ -182,13 +182,13 @@ Once installed, Claude Code will automatically use this skill when you ask about
 
 Talk directly to specific agents or start a brainstorming session:
 
-| Command         | Description                                            |
-| --------------- | ------------------------------------------------------ |
-| `/brainstorm`   | Interactive Q&A to design a new CKB project            |
-| `/ckb-core`     | Talk to the Core Agent (Cell Model, transactions)      |
-| `/ckb-contract` | Talk to the Contract Agent (Rust Scripts, testing)     |
-| `/ckb-dapp`     | Talk to the DApp Agent (CCC SDK, React, wallets)       |
-| `/ckb-fiber`    | Talk to the Fiber Agent (payment channels, Lightning)  |
+| Command         | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| `/brainstorm`   | Interactive Q&A to design a new CKB project           |
+| `/ckb-core`     | Talk to the Core Agent (Cell Model, transactions)     |
+| `/ckb-contract` | Talk to the Contract Agent (Rust Scripts, testing)    |
+| `/ckb-dapp`     | Talk to the DApp Agent (CCC SDK, React, wallets)      |
+| `/ckb-fiber`    | Talk to the Fiber Agent (payment channels, Lightning) |
 
 ### Creating a New Project
 
