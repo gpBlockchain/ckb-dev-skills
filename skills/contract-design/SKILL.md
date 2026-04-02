@@ -458,9 +458,13 @@ Once all 4 phases are confirmed, output the **Contract Design Document**:
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
+### Save design to `docs/`
+
+Save the CONTRACT DESIGN DOCUMENT (which already includes the State Transition Diagram in its STATE TRANSITIONS section) to `docs/<project-name>-contract-design.md`. Create the `docs/` directory if needed. Use the project name from the header (lowercase, hyphens for spaces). Wrap ASCII diagrams and tables in fenced code blocks.
+
 Then hand off to the Contract Agent:
 
-> "Your contract design is complete and confirmed. I will now activate the CKB Contract Agent to implement this design. Load `agents/ckb-contract/SKILL.md` and proceed from Step 1 (Environment check) using the design document above."
+> "Your contract design is complete and confirmed. The design has been saved to `docs/<project-name>-contract-design.md`. I will now activate the CKB Contract Agent to implement this design. Load `agents/ckb-contract/SKILL.md` and proceed from Step 1 (Environment check) using the design document above."
 
 ## Design patterns reference
 
