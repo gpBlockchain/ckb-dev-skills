@@ -72,7 +72,7 @@ Read the corresponding Agent's SKILL.md for operational guidance. Load specializ
 Users can interact with specific agents directly using slash commands:
 
 - `/brainstorm` — Start an interactive Q&A session to design a new CKB project
-- `/contract-design` — Start an interactive contract design session (5-phase confirmation)
+- `/contract-design` — Start an interactive contract design session (4-phase confirmation)
 - `/ckb-core` — Talk directly to the 🔗 Core Agent
 - `/ckb-contract` — Talk directly to the 📝 Contract Agent
 - `/ckb-dapp` — Talk directly to the 🌐 DApp Agent
