@@ -45,10 +45,62 @@ This skill provides a **Team Lead + 4 Specialist Agent** architecture for deep C
 
 ## Installation
 
+### One-Liner Install (Recommended)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/gpBlockchain/ckb-dev-skills/main/install.sh | bash
+```
+
+This automatically clones the repository and installs the skill to `~/.claude/skills/ckb-dev`.
+
+### Claude Code (via Plugin Marketplace)
+
+In Claude Code, register the marketplace first:
+
+```
+/plugin marketplace add gpBlockchain/ckb-dev-skills
+```
+
+Then install the plugin:
+
+```
+/plugin install ckb-dev-skills@ckb-dev-skills-marketplace
+```
+
+### Cursor
+
+In Cursor Agent chat:
+
+```
+/add-plugin ckb-dev-skills
+```
+
+### Codex
+
+Tell Codex:
+
+```
+Fetch and follow instructions from https://raw.githubusercontent.com/gpBlockchain/ckb-dev-skills/main/.codex/INSTALL.md
+```
+
+### OpenCode
+
+Tell OpenCode:
+
+```
+Fetch and follow instructions from https://raw.githubusercontent.com/gpBlockchain/ckb-dev-skills/main/.opencode/INSTALL.md
+```
+
+### Gemini CLI
+
+```bash
+gemini extensions install https://github.com/gpBlockchain/ckb-dev-skills
+```
+
 ### Manual Install
 
 ```bash
-git clone https://github.com/nervosnetwork/ckb-dev-skills
+git clone https://github.com/gpBlockchain/ckb-dev-skills
 cd ckb-dev-skills
 ./install.sh
 ```
@@ -57,6 +109,19 @@ cd ckb-dev-skills
 
 ```bash
 ./install.sh --project
+```
+
+### Update
+
+```bash
+# Re-run the one-liner, or:
+./install.sh --update
+```
+
+### Uninstall
+
+```bash
+./install.sh --uninstall
 ```
 
 ## Skill Structure
@@ -94,13 +159,51 @@ agents/
     ├── SKILL.md                      # ⚡ Fiber Agent
     └── fiber-network.md              # Fiber Network (payment channels)
 
+skills/
+└── brainstorming/
+    └── SKILL.md                      # 🧠 Interactive project brainstorming
+
+commands/
+├── brainstorm.md                     # /brainstorm — Q&A project creation
+├── ckb-core.md                       # /ckb-core — Talk to Core Agent
+├── ckb-contract.md                   # /ckb-contract — Talk to Contract Agent
+├── ckb-dapp.md                       # /ckb-dapp — Talk to DApp Agent
+└── ckb-fiber.md                      # /ckb-fiber — Talk to Fiber Agent
+
 shared/
 └── resources.md                      # Curated reference links
 ```
 
 ## Usage
 
-Once installed, Claude Code will automatically use this skill when you ask about:
+Once installed, Claude Code will automatically use this skill when you ask about CKB development.
+
+### Slash Commands
+
+Talk directly to specific agents or start a brainstorming session:
+
+| Command         | Description                                            |
+| --------------- | ------------------------------------------------------ |
+| `/brainstorm`   | Interactive Q&A to design a new CKB project            |
+| `/ckb-core`     | Talk to the Core Agent (Cell Model, transactions)      |
+| `/ckb-contract` | Talk to the Contract Agent (Rust Scripts, testing)     |
+| `/ckb-dapp`     | Talk to the DApp Agent (CCC SDK, React, wallets)       |
+| `/ckb-fiber`    | Talk to the Fiber Agent (payment channels, Lightning)  |
+
+### Creating a New Project
+
+Use `/brainstorm` to start an interactive session. The agent will ask you questions about:
+
+1. **Project type** — Script, DApp, Fiber, or Full-Stack?
+2. **Goal** — What are you building?
+3. **Technical preferences** — Language, framework, network target
+4. **Experience level** — How familiar are you with CKB?
+
+Then it generates a design summary for your approval before writing any code.
+
+### Automatic Skill Activation
+
+The skill also activates automatically when you ask about:
 
 - CKB on-chain Script (smart contract) development
 - Cell Model and UTXO-style state management

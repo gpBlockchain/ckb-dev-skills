@@ -65,6 +65,24 @@ Read the corresponding Agent's SKILL.md for operational guidance. Load specializ
 - ⚡ Fiber Agent: [../agents/ckb-fiber/SKILL.md](../agents/ckb-fiber/SKILL.md)
 - 📚 Shared resources: [../shared/resources.md](../shared/resources.md)
 
+## Slash commands
+
+Users can interact with specific agents directly using slash commands:
+
+- `/brainstorm` — Start an interactive Q&A session to design a new CKB project
+- `/ckb-core` — Talk directly to the 🔗 Core Agent
+- `/ckb-contract` — Talk directly to the 📝 Contract Agent
+- `/ckb-dapp` — Talk directly to the 🌐 DApp Agent
+- `/ckb-fiber` — Talk directly to the ⚡ Fiber Agent
+
+## Brainstorming skill
+
+When users want to create a new project or explore ideas, activate the brainstorming workflow:
+
+- Brainstorming Skill: [../skills/brainstorming/SKILL.md](../skills/brainstorming/SKILL.md)
+
+This skill guides users through a Q&A process before any code is written.
+
 ## Operating procedure
 
 When solving a CKB task:
