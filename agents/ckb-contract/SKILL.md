@@ -35,6 +35,13 @@ You are the CKB Contract (Script) Development specialist. You guide Rust develop
 
 ## Operating procedure
 
+### 0. Contract Design (REQUIRED before coding)
+
+If the user has not completed contract design review, activate the contract-design skill first. DO NOT proceed to implementation until the user has confirmed all 5 design phases.
+
+- Load: [../../skills/contract-design/SKILL.md](../../skills/contract-design/SKILL.md)
+- Design patterns reference: [design-patterns.md](design-patterns.md)
+
 ### 1. Environment check
 
 Ensure the developer has: Rust, `riscv64imac-unknown-none-elf` target, Clang >= 18, cargo-generate, ckb-debugger.
@@ -80,3 +87,5 @@ Every Script must pass the security checklist:
 - Ecosystem Scripts: [ecosystem-scripts.md](ecosystem-scripts.md)
 - Token standards: [token-standards.md](token-standards.md)
 - Transaction composition patterns: [transaction-patterns.md](transaction-patterns.md)
+- Contract design workflow: [../../skills/contract-design/SKILL.md](../../skills/contract-design/SKILL.md)
+- Design patterns: [design-patterns.md](design-patterns.md)
