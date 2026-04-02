@@ -260,7 +260,7 @@ For each operation:
 > - What must be true about the input Cells?
 > - What constraints must the output Cells satisfy?
 > - Who must sign (which Lock Scripts run)?
-> - What data goes in the Witness for this operation? (Refer to your Phase 2.5 Data Placement Table)
+> - What data goes in the Witness for this operation? (Refer to your Data Placement table from Phase 2.5)
 > - Any arithmetic invariants? (e.g., "sum of input amounts = sum of output amounts")
 >
 > Example for a token transfer:
@@ -476,7 +476,7 @@ Once all 5 phases are confirmed, output the **Contract Design Document**:
 ║ [Phase 2 matrix]                                              ║
 ╠══════════════════════════════════════════════════════════════╣
 ║ DATA PLACEMENT                                                ║
-║ [Phase 2.5 table — field → Data / Witness / Lock args]        ║
+║ [Phase 2.5 table -- field to Data / Witness / Lock args]       ║
 ╠══════════════════════════════════════════════════════════════╣
 ║ STATE TRANSITIONS                                             ║
 ║ [Phase 3 diagram with Lock/Type/Witness per operation]        ║
