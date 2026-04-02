@@ -93,7 +93,7 @@ Once the user approves the design:
 **Important**: If the project involves on-chain Scripts (Script or Full-Stack type), do NOT proceed directly to code generation. Route to the contract-design skill first:
 
 1. Load `skills/contract-design/SKILL.md`
-2. Complete all 5 design phases with user confirmation
+2. Complete all 4 design phases with user confirmation
 3. Then hand off to the Contract Agent for implementation
 
 For all other project types (DApp, Fiber):

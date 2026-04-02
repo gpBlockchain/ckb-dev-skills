@@ -1,6 +1,6 @@
 ---
 name: ckb-contract-design
-description: Interactive 5-phase contract design skill for CKB. Walks through Cell state modeling, roles & permissions, state transitions, transaction templates, and security pre-review — all confirmed step by step before any code is written.
+description: Interactive 4-phase contract design skill for CKB. Walks through Cell state modeling, roles & permissions, state transitions, and security pre-review — all confirmed step by step before any code is written.
 user-invocable: true
 ---
 
@@ -17,7 +17,7 @@ Activate this skill when the user wants to:
 
 ## Core principle
 
-**Never write contract code without a confirmed design.** Walk through all 5 phases with the user, pause after each phase for explicit confirmation, and only hand off to the Contract Agent once every phase is approved.
+**Never write contract code without a confirmed design.** Walk through all 4 phases with the user, pause after each phase for explicit confirmation, and only hand off to the Contract Agent once every phase is approved.
 
 ## Design workflow
 
@@ -383,63 +383,11 @@ Cell Lifecycle:
 
 ---
 
-### Phase 4: Transaction Templates
-
-For each operation identified in Phase 3, generate a concrete transaction template. Reference the style from `agents/ckb-contract/transaction-patterns.md`.
-
-**Phase 4 output — Transaction Templates:**
-
-For each operation, produce:
-
-````
-## Transaction: [operation name]
-
-**Purpose**: [one-sentence description]
-
-**Structure**:
-
-```typescript
-const tx = ccc.Transaction.from({
-  inputs: [
-    // [description of each input Cell]
-    { previousOutput: { txHash: "0x...", index: 0 } }, // [CellType]
-  ],
-  outputs: [
-    // [description of each output Cell]
-    {
-      lock: [lockScript],      // [who owns it]
-      type: [typeScript],      // [rules enforced, or omit if none]
-      capacity: ccc.fixedPointFrom("[X]"), // [minimum CKB required]
-    },
-  ],
-  outputsData: [
-    // [encoded data for each output]
-    ccc.bytesFrom("[encoded fields]"),
-  ],
-});
-
-// cell_deps required:
-tx.addCellDeps({ outPoint: [lockScriptDep], depType: "code" });
-tx.addCellDeps({ outPoint: [typeScriptDep], depType: "code" });
-
-// witnesses:
-// index 0: [signature or witness data]
-```
-
-**Validation (Type Script checks)**:
-- [rule 1]
-- [rule 2]
-````
-
-⏸ **Pause here.** Ask: "Do these transaction templates match what you expect? Should I adjust any inputs, outputs, cell_deps, or validation rules?"
-
----
-
-### Phase 5: Security Pre-Review
+### Phase 4: Security Pre-Review
 
 Apply the checklist from `agents/ckb-contract/security.md` to the confirmed design. Flag any risk points **before** any code is written.
 
-**Phase 5 output — Security Pre-Review Report:**
+**Phase 4 output — Security Pre-Review Report:**
 
 ```
 Security Pre-Review
@@ -484,7 +432,7 @@ Based on your design, here are the security considerations:
 
 ## Design complete — Handoff to Contract Agent
 
-Once all 5 phases are confirmed, output the **Contract Design Document**:
+Once all 4 phases are confirmed, output the **Contract Design Document**:
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
@@ -505,11 +453,8 @@ Once all 5 phases are confirmed, output the **Contract Design Document**:
 ║ STATE TRANSITIONS                                             ║
 ║ [Phase 3 diagram with Lock/Type/Witness per operation]        ║
 ╠══════════════════════════════════════════════════════════════╣
-║ TRANSACTION TEMPLATES                                         ║
-║ [Phase 4 templates]                                           ║
-╠══════════════════════════════════════════════════════════════╣
 ║ SECURITY NOTES                                                ║
-║ [Phase 5 flagged items and mitigations]                       ║
+║ [Phase 4 flagged items and mitigations]                       ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 

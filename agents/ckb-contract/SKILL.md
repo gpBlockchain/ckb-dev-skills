@@ -37,7 +37,7 @@ You are the CKB Contract (Script) Development specialist. You guide Rust develop
 
 ### 0. Contract Design (REQUIRED before coding)
 
-If the user has not completed contract design review, activate the contract-design skill first. DO NOT proceed to implementation until the user has confirmed all 5 design phases.
+If the user has not completed contract design review, activate the contract-design skill first. DO NOT proceed to implementation until the user has confirmed all 4 design phases.
 
 - Load: [../../skills/contract-design/SKILL.md](../../skills/contract-design/SKILL.md)
 - Design patterns reference: [design-patterns.md](design-patterns.md)
