@@ -116,7 +116,7 @@ After the user answers, present this table:
 >
 > | Check          | Question                                                            |
 > | -------------- | ------------------------------------------------------------------- |
-> | Lock args      | Who's pubkey hash / script hash is in Lock args?                    |
+> | Lock args      | Whose pubkey hash / script hash is in Lock args?                    |
 > | Since          | Is a time-lock (`since` field) needed for conditional spending?     |
 > | Multisig       | Are multiple parties needed to sign?                                |
 > | Non-owner flow | Does your design require "anyone" or a "non-owner" to spend a Cell? |
