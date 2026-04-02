@@ -161,6 +161,80 @@ Type Scripts:
 
 ---
 
+### Phase 2.5: Data Placement Design
+
+Before defining state transitions, guide the user to decide **where each data field lives**. This is a critical CKB design decision that affects Cell size, on-chain query support, and capacity cost.
+
+**Placement options:**
+
+| Placement   | Characteristics                                                     | Best for                                                      |
+| ----------- | ------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Cell Data   | Persisted on-chain, stored by all nodes, consumes capacity          | State that must survive across transactions (balance, owner)  |
+| Witness     | Transaction-scoped, not stored long-term, no capacity cost          | Temporary verification data (signatures, proofs, parameters)  |
+| Lock args   | Part of the Lock Script, defines Cell identity and spending control | Identity and authorization data (owner pubkey hash, multisig) |
+| `cell_deps` | Read-only reference to another live Cell                            | Shared configuration, oracle data, Script code                |
+
+**Question 6.5 — Data placement**
+
+For each data field identified in Phase 1:
+
+> Where should this field be stored?
+>
+> **Place in Cell Data if:**
+>
+> - It must persist across transactions (e.g., token balance, rental rate)
+> - Other contracts need to read it from the Cell
+> - You need to query it on-chain (e.g., "find all Cells where status = active")
+>
+> **Place in Witness if:**
+>
+> - It is only needed for single-transaction validation (e.g., a signature, a proof)
+> - It can be derived from other data (e.g., total cost = rate × duration)
+> - It is a one-time parameter (e.g., a nonce, an operation code)
+>
+> **Place in Lock args if:**
+>
+> - It defines who controls the Cell (e.g., owner public key hash)
+> - It is part of the authorization identity
+>
+> ⚠️ **Warning**: Witness data is NOT stored on-chain after the transaction. You cannot query or retrieve it later. If you need the data after the transaction completes, it must go in Cell Data.
+>
+> Example for a billboard rental contract:
+>
+> | Field       | Candidates       | Choice    | Rationale                                         |
+> | ----------- | ---------------- | --------- | ------------------------------------------------- |
+> | owner       | Data / Lock args | Lock args | Identity belongs in Lock, controls spending       |
+> | rate        | Data / Witness   | Data      | Persists across transactions, modifiable by owner |
+> | lease_start | Data / Witness   | Data      | Must be queryable to check lease status           |
+> | duration    | Data / Witness   | Witness   | Only needed during rent validation                |
+> | deposit     | Data / Witness   | Data      | Must persist for refund calculation               |
+> | renter      | Data / Lock args | Data      | Not in Lock args because Lock is owner-controlled |
+
+**Phase 2.5 output — Data Placement Table:**
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Data Placement                                                            │
+├──────────────┬──────────────────┬──────────────┬─────────────────────────┤
+│ Field        │ Candidates       │ Placement    │ Rationale               │
+├──────────────┼──────────────────┼──────────────┼─────────────────────────┤
+│ [field1]     │ Data / Lock args │ [chosen]     │ [why]                   │
+│ [field2]     │ Data / Witness   │ [chosen]     │ [why]                   │
+│ [field3]     │ Data / Witness   │ [chosen]     │ [why]                   │
+└──────────────┴──────────────────┴──────────────┴─────────────────────────┘
+
+Common Patterns:
+  Pattern A — All state in Data (simple, easy to query, higher capacity cost)
+  Pattern B — Minimal Data + Witness (smaller Cells, harder to query history)
+  Pattern C — Data + Lock args (separate identity from application state)
+
+See "Data placement patterns" section at the end of this document for details.
+```
+
+⏸ **Pause here.** Ask: "Does this data placement look right? For each field in Witness, confirm you will not need to query it after the transaction. For each field in Data, confirm the capacity cost is acceptable."
+
+---
+
 ### Phase 3: State Transitions
 
 **Ask these questions one at a time.**
@@ -186,12 +260,14 @@ For each operation:
 > - What must be true about the input Cells?
 > - What constraints must the output Cells satisfy?
 > - Who must sign (which Lock Scripts run)?
+> - What data goes in the Witness for this operation? (Refer to your Phase 2.5 Data Placement Table)
 > - Any arithmetic invariants? (e.g., "sum of input amounts = sum of output amounts")
 >
 > Example for a token transfer:
 > Pre-condition: sender owns input Balance Cell
 > Constraint: sum(input amounts) == sum(output amounts)
 > Signature: sender's Lock Script passes
+> Witness: sender signature in `WitnessArgs.lock`
 
 **Phase 3 output — State Transition Diagram:**
 
@@ -200,20 +276,66 @@ State Transition Diagram
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [Operation: create]
-  Inputs:  (none, or: fee Cell)
-  Outputs: [CellType1] with initial state
-  Auth:    [who signs]
+  Data Placement:
+    "[field] in Data because [reason]"
+    "[field] in Witness because [reason]"
+
+  Inputs:
+    [0] [fee Cell or specific Cell]
+        Lock: [Lock Script name] args: [Lock args]
+        Type: [Type Script name, or none]
+
+  Witnesses:
+    [0] lock: [signature or authorization data]
+        input_type: [Type Script verification data, if any]
+
+  Outputs:
+    [0] [CellType1] with initial state
+        Lock: [Lock Script name] args: [Lock args]
+        Type: [Type Script name]
+        Data: {[field: type], [field: type]} — from Phase 2.5
+        Capacity: [X CKB]
+
+  Auth:    [who signs — which Lock Scripts run]
   Rules:   [validation constraints]
 
 [Operation: update]
-  Inputs:  [CellType1] (current state)
-  Outputs: [CellType1] (new state)
+  Data Placement:
+    "[field] updated in Data because [reason]"
+    "[field] in Witness because [reason]"
+
+  Inputs:
+    [0] [CellType1] (current state)
+        Lock: [Lock Script name] args: [Lock args]
+        Type: [Type Script name]
+        Data: {[current fields]}
+
+  Witnesses:
+    [0] lock: [signature]
+        input_type: {[verification data from Phase 2.5 Witness fields]}
+
+  Outputs:
+    [0] [CellType1] (new state)
+        Lock: [Lock Script name] args: [Lock args]
+        Type: [Type Script name]
+        Data: {[updated fields]}
+        Capacity: [X CKB]
+
   Auth:    [who signs]
   Rules:   [validation constraints]
 
 [Operation: destroy]
-  Inputs:  [CellType1]
+  Inputs:
+    [0] [CellType1]
+        Lock: [Lock Script name] args: [Lock args]
+        Type: [Type Script name]
+        Data: {[current fields]}
+
+  Witnesses:
+    [0] lock: [signature]
+
   Outputs: (none — capacity returned to owner)
+
   Auth:    [who signs]
   Rules:   [validation constraints]
 
@@ -223,6 +345,15 @@ Cell Lifecycle:
                                          ◀──update──
                                          ──destroy──▶ (capacity released)
 ```
+
+**Phase 3 checklist — verify before moving on:**
+
+- [ ] Every input and output Cell has Lock Script, Type Script, and Data explicitly labeled
+- [ ] Every field's placement (Data / Witness / Lock args) matches the Phase 2.5 table
+- [ ] Witness structure is fully specified for each operation
+- [ ] Fields placed in Witness are confirmed not needed for post-transaction queries
+- [ ] Fields placed in Data have acceptable capacity cost
+- [ ] Validation rules reference the correct data source (Data vs Witness)
 
 ⏸ **Pause here.** Ask: "Does this state transition model cover all the operations you need? Are the validation rules complete?"
 
@@ -344,8 +475,11 @@ Once all 5 phases are confirmed, output the **Contract Design Document**:
 ║ PERMISSIONS                                                   ║
 ║ [Phase 2 matrix]                                              ║
 ╠══════════════════════════════════════════════════════════════╣
+║ DATA PLACEMENT                                                ║
+║ [Phase 2.5 table — field → Data / Witness / Lock args]        ║
+╠══════════════════════════════════════════════════════════════╣
 ║ STATE TRANSITIONS                                             ║
-║ [Phase 3 diagram]                                             ║
+║ [Phase 3 diagram with Lock/Type/Witness per operation]        ║
 ╠══════════════════════════════════════════════════════════════╣
 ║ TRANSACTION TEMPLATES                                         ║
 ║ [Phase 4 templates]                                           ║
@@ -362,3 +496,60 @@ Then hand off to the Contract Agent:
 ## Design patterns reference
 
 When answering questions in any phase, refer to `agents/ckb-contract/design-patterns.md` for established CKB patterns that match the user's scenario.
+
+## Data placement patterns
+
+Reference these common patterns when guiding the user through Phase 2.5 (Data Placement Design).
+
+### Pattern A: All state in Cell Data
+
+Store every field in the Cell's `data` field.
+
+```
+Cell
+├── lock:  owner lock
+├── type:  app Type Script
+└── data:  {field1, field2, field3, ...}    ← everything here
+Witness: signature only
+```
+
+- **Pros**: Easy to query on-chain, simple to validate, complete state in one place
+- **Cons**: Larger Cell, higher capacity cost, all fields consume on-chain storage
+- **Example**: sUDT Balance Cell (amount in data), Info Cell (name + total supply in data)
+- **Best for**: Simple contracts where all state must be queryable
+
+### Pattern B: Minimal Data + Witness supplement
+
+Keep only essential persistent state in Cell Data; pass temporary or derivable data in Witness.
+
+```
+Cell
+├── lock:  owner lock
+├── type:  app Type Script
+└── data:  {core_field1, core_field2}       ← minimal persistent state
+Witness:
+├── lock:  signature
+└── input_type: {param1, param2, proof}     ← operation parameters
+```
+
+- **Pros**: Smaller Cell, lower capacity cost, flexible operation parameters
+- **Cons**: Cannot query Witness data after transaction, must reconstruct history from transactions
+- **Example**: Payment channel (balance in data, settlement proof in witness)
+- **Best for**: Contracts with operation-specific parameters or large verification data
+
+### Pattern C: Lock args + Data separation
+
+Store identity and authorization data in Lock Script `args`; store application state in Cell Data.
+
+```
+Cell
+├── lock:  CustomLock args: {owner_pubkey_hash}   ← identity here
+├── type:  app Type Script
+└── data:  {app_state_field1, app_state_field2}    ← app state here
+Witness: signature + operation data
+```
+
+- **Pros**: Clean separation of identity and application logic, Lock handles authorization naturally
+- **Cons**: Requires custom Lock Script, Lock args changes require Cell recreation
+- **Example**: Custom lock contracts where the owner identity is embedded in the Lock
+- **Best for**: Contracts where authorization logic is complex or multi-party
