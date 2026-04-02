@@ -1,0 +1,21 @@
+{
+  "name": "ckb-dev-skills",
+  "description": "CKB development skills for AI agents: Cell Model, Script/contract development, DApp SDK, Fiber Network, and more",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nervos CKB DevRel"
+  },
+  "homepage": "https://github.com/gpBlockchain/ckb-dev-skills",
+  "repository": "https://github.com/gpBlockchain/ckb-dev-skills",
+  "license": "MIT",
+  "keywords": [
+    "ckb",
+    "nervos",
+    "blockchain",
+    "smart-contracts",
+    "cell-model",
+    "fiber-network",
+    "dapp",
+    "skills"
+  ]
+}
