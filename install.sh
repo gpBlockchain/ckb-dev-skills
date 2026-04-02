@@ -8,6 +8,8 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_NAME="ckb-dev"
 SOURCE_DIR="$SCRIPT_DIR/skill"
+AGENTS_DIR="$SCRIPT_DIR/agents"
+SHARED_DIR="$SCRIPT_DIR/shared"
 
 # Default to personal installation
 INSTALL_PATH="$HOME/.claude/skills/$SKILL_NAME"
@@ -44,9 +46,14 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Check if source directory exists
+# Check if source directories exist
 if [ ! -d "$SOURCE_DIR" ]; then
     echo "Error: Source directory '$SOURCE_DIR' not found"
+    exit 1
+fi
+
+if [ ! -d "$AGENTS_DIR" ]; then
+    echo "Error: Agents directory '$AGENTS_DIR' not found"
     exit 1
 fi
 
@@ -75,12 +82,19 @@ fi
 echo "Installing CKB Dev Skill..."
 cp -r "$SOURCE_DIR" "$INSTALL_PATH"
 
+# Copy agents and shared directories
+cp -r "$AGENTS_DIR" "$INSTALL_PATH/agents"
+if [ -d "$SHARED_DIR" ]; then
+    cp -r "$SHARED_DIR" "$INSTALL_PATH/shared"
+fi
+
 echo ""
 echo "Successfully installed to: $INSTALL_PATH"
 echo ""
 echo "Installed files:"
 find "$INSTALL_PATH" -type f -name "*.md" | sort | while read -r file; do
-    echo "  - $(basename "$file")"
+    # Show relative path from install path
+    echo "  - ${file#$INSTALL_PATH/}"
 done
 echo ""
 echo "The skill is now available in Claude Code."

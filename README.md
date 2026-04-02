@@ -4,7 +4,34 @@ A comprehensive Vibe coding skill and best practices for Nervos CKB development 
 
 ## Overview
 
-This skill provides with deep knowledge of the CKB development ecosystem:
+This skill provides a **Team Lead + 4 Specialist Agent** architecture for deep CKB development knowledge:
+
+```
+                    ┌─────────────────────────────┐
+         You ──────▶│  🧠 Team Lead (ckb-dev-lead) │
+                    │   Intent → Route → Review    │
+                    └──────────┬──────────────────┘
+                               │
+            ┌──────────┬───────┴──────┬──────────────┐
+            ▼          ▼              ▼              ▼
+     ┌────────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
+     │ 🔗 Core    │ │ 📝 Contract│ │ 🌐 DApp  │ │ ⚡ Fiber │
+     │ Agent      │ │ Agent     │ │ Agent    │ │ Agent    │
+     │            │ │           │ │          │ │          │
+     │ Cell Model │ │ Rust      │ │ CCC SDK  │ │ Payment  │
+     │ Transaction│ │ Testing   │ │ React    │ │ Channels │
+     │ CKB-VM     │ │ Deploy    │ │ Wallets  │ │ Swaps    │
+     └────────────┘ └──────────┘ └──────────┘ └──────────┘
+```
+
+### Agent Specializations
+
+- **🔗 Core Agent** — Cell Model, Script structure, Transaction structure, CKB-VM. For understanding CKB fundamentals.
+- **📝 Contract Agent** — Rust environment, writing Scripts, testing, debugging, security, deployment, token standards. For Rust smart contract developers.
+- **🌐 DApp Agent** — CCC SDK, React wallet integration, transaction building, frontend scaffolding. For TypeScript/frontend developers.
+- **⚡ Fiber Agent** — Fiber node operations, payment channels, invoices, stablecoin payments, cross-chain interop. For payment/L2 developers.
+
+### Coverage
 
 - **Cell Model**: Generalized UTXO model — Cells, capacity, Live/Dead state
 - **Scripts**: On-chain programs (Lock Script, Type Script) running on CKB-VM (RISC-V)
@@ -36,23 +63,39 @@ cd ckb-dev-skills
 
 ```
 skill/
-├── SKILL.md                 # Main skill definition (required)
-├── cell-model.md            # Cell Model basics
-├── script.md                # Script structure & types
-	├── transaction.md           # Transaction structure
-	├── ckb-vm.md                # CKB-VM, cycles, syscalls
-	├── rust-setup.md            # Rust environment setup
-	├── writing-scripts.md       # Writing Scripts (authoritative links)
-	├── ccc-sdk.md               # CCC SDK for DApp development
-	├── transaction-patterns.md  # Transaction composition patterns
-	├── token-standards.md       # sUDT, xUDT, RGB++
-├── testing.md               # Testing Scripts
-├── debugging.md             # Debugging Scripts
-├── deployment.md            # Deployment & tools
-├── ecosystem-scripts.md     # System/ecosystem Scripts
-├── security.md              # Security checklist
-├── fiber-network.md         # Fiber Network (payment channels)
-└── resources.md             # Curated reference links
+├── SKILL.md                          # 🧠 Team Lead — main entry point
+
+agents/
+├── ckb-core/
+│   ├── SKILL.md                      # 🔗 Core Agent
+│   ├── cell-model.md                 # Cell Model basics
+│   ├── script.md                     # Script structure & types
+│   ├── transaction.md                # Transaction structure
+│   └── ckb-vm.md                     # CKB-VM, cycles, syscalls
+│
+├── ckb-contract/
+│   ├── SKILL.md                      # 📝 Contract Agent
+│   ├── rust-setup.md                 # Rust environment setup
+│   ├── writing-scripts.md            # Writing Scripts (authoritative links)
+│   ├── testing.md                    # Testing Scripts
+│   ├── debugging.md                  # Debugging Scripts
+│   ├── deployment.md                 # Deployment & tools
+│   ├── security.md                   # Security checklist
+│   ├── ecosystem-scripts.md          # System/ecosystem Scripts
+│   ├── token-standards.md            # sUDT, xUDT, RGB++
+│   └── transaction-patterns.md       # Transaction composition patterns
+│
+├── ckb-dapp/
+│   ├── SKILL.md                      # 🌐 DApp Agent
+│   ├── ccc-sdk.md                    # CCC SDK for DApp development
+│   └── wallet-integration.md         # Wallet connection & ecosystem
+│
+└── ckb-fiber/
+    ├── SKILL.md                      # ⚡ Fiber Agent
+    └── fiber-network.md              # Fiber Network (payment channels)
+
+shared/
+└── resources.md                      # Curated reference links
 ```
 
 ## Usage
