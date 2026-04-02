@@ -128,10 +128,10 @@ cd ckb-dev-skills
 ## Skill Structure
 
 ```
-skill/
-├── SKILL.md                          # 🧠 Team Lead — main entry point
-
 agents/
+├── ckb-dev-lead/
+│   └── SKILL.md                      # 🧠 Team Lead — main entry point
+│
 ├── ckb-core/
 │   ├── SKILL.md                      # 🔗 Core Agent
 │   ├── cell-model.md                 # Cell Model basics
@@ -189,6 +189,7 @@ Talk directly to specific agents or start a brainstorming session:
 
 | Command            | Description                                                        |
 | ------------------ | ------------------------------------------------------------------ |
+| `/ckb-dev-lead`    | Talk to the Team Lead (routes to the right specialist agent)       |
 | `/brainstorm`      | Interactive Q&A to design a new CKB project                        |
 | `/contract-design` | Interactive 4-phase contract design with step-by-step confirmation |
 | `/ckb-core`        | Talk to the Core Agent (Cell Model, transactions)                  |

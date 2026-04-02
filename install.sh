@@ -15,14 +15,13 @@ REPO_URL="https://github.com/gpBlockchain/ckb-dev-skills.git"
 CLONE_DIR="$HOME/.ckb-dev-skills"
 
 # Detect if running from a local clone or remotely via curl|bash
-if [ -n "${BASH_SOURCE[0]}" ] && [ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)/skill/SKILL.md" ]; then
+if [ -n "${BASH_SOURCE[0]}" ] && [ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)/agents/ckb-dev-lead/SKILL.md" ]; then
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     LOCAL_MODE=true
 else
     LOCAL_MODE=false
 fi
 
-SOURCE_DIR=""
 AGENTS_DIR=""
 SHARED_DIR=""
 SKILLS_DIR=""
@@ -98,26 +97,20 @@ if [ "$LOCAL_MODE" = false ]; then
     SCRIPT_DIR="$CLONE_DIR"
 fi
 
-SOURCE_DIR="$SCRIPT_DIR/skill"
 AGENTS_DIR="$SCRIPT_DIR/agents"
 SHARED_DIR="$SCRIPT_DIR/shared"
 SKILLS_DIR="$SCRIPT_DIR/skills"
 COMMANDS_DIR="$SCRIPT_DIR/commands"
 
 # Check if source directories exist
-if [ ! -d "$SOURCE_DIR" ]; then
-    echo "Error: Source directory '$SOURCE_DIR' not found"
-    exit 1
-fi
-
 if [ ! -d "$AGENTS_DIR" ]; then
     echo "Error: Agents directory '$AGENTS_DIR' not found"
     exit 1
 fi
 
 # Check if SKILL.md exists
-if [ ! -f "$SOURCE_DIR/SKILL.md" ]; then
-    echo "Error: SKILL.md not found in '$SOURCE_DIR'"
+if [ ! -f "$AGENTS_DIR/ckb-dev-lead/SKILL.md" ]; then
+    echo "Error: SKILL.md not found in '$AGENTS_DIR/ckb-dev-lead'"
     exit 1
 fi
 
@@ -142,7 +135,7 @@ fi
 
 # Copy skill files
 echo "📦 Installing CKB Dev Skill..."
-cp -r "$SOURCE_DIR" "$INSTALL_PATH"
+mkdir -p "$INSTALL_PATH"
 
 # Copy agents and shared directories
 cp -r "$AGENTS_DIR" "$INSTALL_PATH/agents"
@@ -169,6 +162,7 @@ find "$INSTALL_PATH" -type f -name "*.md" | sort | while read -r file; do
 done
 echo ""
 echo "🚀 Available commands (Claude Code slash commands):"
+echo "  /ckb-dev-lead   — Talk to the Team Lead (routes to the right agent)"
 echo "  /brainstorm     — Interactive Q&A to design a new CKB project"
 echo "  /ckb-core       — Talk to the Core Agent (Cell Model, transactions)"
 echo "  /ckb-contract   — Talk to the Contract Agent (Rust Scripts, testing)"
