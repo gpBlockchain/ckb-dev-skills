@@ -60,12 +60,12 @@ When a task spans multiple domains, coordinate the Agents in the following order
 
 Read the corresponding Agent's SKILL.md for operational guidance. Load specialized topic documents on demand (progressive disclosure).
 
-- 🔗 Core Agent: [../agents/ckb-core/SKILL.md](../agents/ckb-core/SKILL.md)
-- 📝 Contract Agent: [../agents/ckb-contract/SKILL.md](../agents/ckb-contract/SKILL.md)
-- 🌐 DApp Agent: [../agents/ckb-dapp/SKILL.md](../agents/ckb-dapp/SKILL.md)
-- ⚡ Fiber Agent: [../agents/ckb-fiber/SKILL.md](../agents/ckb-fiber/SKILL.md)
-- 📐 Contract Design Skill: [../skills/contract-design/SKILL.md](../skills/contract-design/SKILL.md)
-- 📚 Shared resources: [../shared/resources.md](../shared/resources.md)
+- 🔗 Core Agent: [../ckb-core/SKILL.md](../ckb-core/SKILL.md)
+- 📝 Contract Agent: [../ckb-contract/SKILL.md](../ckb-contract/SKILL.md)
+- 🌐 DApp Agent: [../ckb-dapp/SKILL.md](../ckb-dapp/SKILL.md)
+- ⚡ Fiber Agent: [../ckb-fiber/SKILL.md](../ckb-fiber/SKILL.md)
+- 📐 Contract Design Skill: [../../skills/contract-design/SKILL.md](../../skills/contract-design/SKILL.md)
+- 📚 Shared resources: [../../shared/resources.md](../../shared/resources.md)
 
 ## Slash commands
 
@@ -77,12 +77,13 @@ Users can interact with specific agents directly using slash commands:
 - `/ckb-contract` — Talk directly to the 📝 Contract Agent
 - `/ckb-dapp` — Talk directly to the 🌐 DApp Agent
 - `/ckb-fiber` — Talk directly to the ⚡ Fiber Agent
+- `/ckb-dev-lead` — Talk directly to the 🧠 Team Lead
 
 ## Brainstorming skill
 
 When users want to create a new project or explore ideas, activate the brainstorming workflow:
 
-- Brainstorming Skill: [../skills/brainstorming/SKILL.md](../skills/brainstorming/SKILL.md)
+- Brainstorming Skill: [../../skills/brainstorming/SKILL.md](../../skills/brainstorming/SKILL.md)
 
 This skill guides users through a Q&A process before any code is written.
 
