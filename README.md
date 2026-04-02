@@ -27,6 +27,7 @@ This skill provides a **Team Lead + 4 Specialist Agent** architecture for deep C
 ### Agent Specializations
 
 - **🔗 Core Agent** — Cell Model, Script structure, Transaction structure, CKB-VM. For understanding CKB fundamentals.
+- **📐 Contract Design Skill** — Interactive 5-phase design workflow (Cell modeling, permissions, state transitions, transaction templates, security review). Run before writing contract code.
 - **📝 Contract Agent** — Rust environment, writing Scripts, testing, debugging, security, deployment, token standards. For Rust smart contract developers.
 - **🌐 DApp Agent** — CCC SDK, React wallet integration, transaction building, frontend scaffolding. For TypeScript/frontend developers.
 - **⚡ Fiber Agent** — Fiber node operations, payment channels, invoices, stablecoin payments, cross-chain interop. For payment/L2 developers.
@@ -148,7 +149,8 @@ agents/
 │   ├── security.md                   # Security checklist
 │   ├── ecosystem-scripts.md          # System/ecosystem Scripts
 │   ├── token-standards.md            # sUDT, xUDT, RGB++
-│   └── transaction-patterns.md       # Transaction composition patterns
+│   ├── transaction-patterns.md       # Transaction composition patterns
+│   └── design-patterns.md            # CKB contract design patterns
 │
 ├── ckb-dapp/
 │   ├── SKILL.md                      # 🌐 DApp Agent
@@ -160,11 +162,14 @@ agents/
     └── fiber-network.md              # Fiber Network (payment channels)
 
 skills/
-└── brainstorming/
-    └── SKILL.md                      # 🧠 Interactive project brainstorming
+├── brainstorming/
+│   └── SKILL.md                      # 🧠 Interactive project brainstorming
+└── contract-design/
+    └── SKILL.md                      # 📐 Interactive contract design (5-phase)
 
 commands/
 ├── brainstorm.md                     # /brainstorm — Q&A project creation
+├── contract-design.md                # /contract-design — 5-phase design session
 ├── ckb-core.md                       # /ckb-core — Talk to Core Agent
 ├── ckb-contract.md                   # /ckb-contract — Talk to Contract Agent
 ├── ckb-dapp.md                       # /ckb-dapp — Talk to DApp Agent
@@ -182,13 +187,14 @@ Once installed, Claude Code will automatically use this skill when you ask about
 
 Talk directly to specific agents or start a brainstorming session:
 
-| Command         | Description                                           |
-| --------------- | ----------------------------------------------------- |
-| `/brainstorm`   | Interactive Q&A to design a new CKB project           |
-| `/ckb-core`     | Talk to the Core Agent (Cell Model, transactions)     |
-| `/ckb-contract` | Talk to the Contract Agent (Rust Scripts, testing)    |
-| `/ckb-dapp`     | Talk to the DApp Agent (CCC SDK, React, wallets)      |
-| `/ckb-fiber`    | Talk to the Fiber Agent (payment channels, Lightning) |
+| Command            | Description                                                        |
+| ------------------ | ------------------------------------------------------------------ |
+| `/brainstorm`      | Interactive Q&A to design a new CKB project                        |
+| `/contract-design` | Interactive 5-phase contract design with step-by-step confirmation |
+| `/ckb-core`        | Talk to the Core Agent (Cell Model, transactions)                  |
+| `/ckb-contract`    | Talk to the Contract Agent (Rust Scripts, testing)                 |
+| `/ckb-dapp`        | Talk to the DApp Agent (CCC SDK, React, wallets)                   |
+| `/ckb-fiber`       | Talk to the Fiber Agent (payment channels, Lightning)              |
 
 ### Creating a New Project
 
@@ -200,6 +206,18 @@ Use `/brainstorm` to start an interactive session. The agent will ask you questi
 4. **Experience level** — How familiar are you with CKB?
 
 Then it generates a design summary for your approval before writing any code.
+
+### Designing a Contract
+
+Before writing any contract code, use `/contract-design` to walk through the 5-phase design process:
+
+1. **Phase 1 — State Modeling**: Define your Cell types, data fields, and capacity budgets
+2. **Phase 2 — Roles & Permissions**: Choose Lock Scripts, define who can create/update/destroy each Cell
+3. **Phase 3 — State Transitions**: List all operations and their validation rules
+4. **Phase 4 — Transaction Templates**: Generate concrete transaction structures for each operation
+5. **Phase 5 — Security Pre-Review**: Check the design against the security checklist before writing code
+
+Each phase pauses for your confirmation before proceeding. Once all 5 phases are approved, the skill produces a **Contract Design Document** and hands off to the Contract Agent for implementation.
 
 ### Automatic Skill Activation
 
