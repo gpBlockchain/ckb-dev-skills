@@ -94,6 +94,10 @@ After the user answers, present this table:
 
 ### Phase 2: Roles & Permissions
 
+> ⚠️ **CRITICAL CHECK**: Lock Script determines WHO can spend a Cell.
+> Type Script only validates HOW a Cell can be spent. Type can NEVER override Lock.
+> Always verify that your permission design is feasible under CKB's Lock/Type separation.
+
 **Ask these questions one at a time.**
 
 **Question 4 — Roles**
@@ -105,6 +109,26 @@ After the user answers, present this table:
 > - **Destroy** it (consume without recreating)?
 >
 > Example roles: "the token issuer", "any user with a valid signature", "a DAO admin multisig", "anyone"
+
+**Question 4a — Lock Permission Boundary** [NEW]
+
+> Before choosing Lock Scripts, verify that each actor's permissions are feasible under CKB's architecture:
+>
+> | Check          | Question                                                            |
+> | -------------- | ------------------------------------------------------------------- |
+> | Lock args      | Who's pubkey hash / script hash is in Lock args?                    |
+> | Since          | Is a time-lock (`since` field) needed for conditional spending?     |
+> | Multisig       | Are multiple parties needed to sign?                                |
+> | Non-owner flow | Does your design require "anyone" or a "non-owner" to spend a Cell? |
+>
+> If your design requires a non-owner to spend a Cell, you **must** use one of the following — a Type Script alone is NOT sufficient:
+>
+> - `since` time-lock — allow spending after a time/block/epoch condition
+> - `anyone_can_pay` — allow anyone to add capacity or UDT to the Cell
+> - Omnilock with special conditions — flexible multi-auth support
+> - Custom Lock Script — fully custom authorization logic
+>
+> Verify: does your permission model align with CKB's Lock/Type separation? If any role claims "anyone can trigger" an action on a Cell protected by a single-key Lock, the design is **invalid** — that Cell can only be spent by the key holder.
 
 **Question 5 — Lock Script selection**
 
