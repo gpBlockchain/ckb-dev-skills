@@ -458,9 +458,27 @@ Once all 4 phases are confirmed, output the **Contract Design Document**:
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
+### Save design artifacts to `doc/`
+
+After generating the design document, save both design artifacts to the project's `doc/` directory so they are version-controlled alongside the code:
+
+1. **Create the `doc/` directory** if it does not already exist.
+2. **Save the State Transition Diagram** to `doc/state-transition-diagram.md` — include the full Phase 3 output (the diagram with all operations, inputs, outputs, witnesses, auth, rules, and the Cell lifecycle).
+3. **Save the CONTRACT DESIGN DOCUMENT** to `doc/contract-design-document.md` — include the complete document with all 5 sections (Cell Schema, Permissions, Data Placement, State Transitions, Security Notes).
+
+Use Markdown format for both files. Preserve the ASCII tables and diagrams as fenced code blocks so they render correctly. Include a YAML front-matter header with the project name and date in each file.
+
+Example file structure after saving:
+
+```
+doc/
+├── state-transition-diagram.md
+└── contract-design-document.md
+```
+
 Then hand off to the Contract Agent:
 
-> "Your contract design is complete and confirmed. I will now activate the CKB Contract Agent to implement this design. Load `agents/ckb-contract/SKILL.md` and proceed from Step 1 (Environment check) using the design document above."
+> "Your contract design is complete and confirmed. The design artifacts have been saved to `doc/state-transition-diagram.md` and `doc/contract-design-document.md`. I will now activate the CKB Contract Agent to implement this design. Load `agents/ckb-contract/SKILL.md` and proceed from Step 1 (Environment check) using the design document above."
 
 ## Design patterns reference
 
