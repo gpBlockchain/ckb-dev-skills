@@ -1,0 +1,40 @@
+array Byte32 [byte; 32];
+array Uint64 [byte; 8];
+
+vector Bytes <byte>;
+
+// Billboard cell data — persisted on-chain state.
+// The owner identity (lock hash) is stored in Lock Script args,
+// not in the data area.
+table BillboardData {
+    // Lock script hash of the billboard creator/owner
+    creator_lock_hash: Byte32,
+    // Daily rental price in shannons
+    daily_price: Uint64,
+    // Advertisement landing page URL
+    ad_url: Bytes,
+    // Advertisement image URL
+    image_url: Bytes,
+    // Lock script hash of the current renter (all zeros if vacant)
+    renter_lock_hash: Byte32,
+    // Lease start time (unix timestamp, seconds)
+    lease_start: Uint64,
+    // Lease end time (unix timestamp, seconds)
+    lease_end: Uint64,
+}
+
+// Action types carried in the witness for billboard transactions.
+table BillboardCreate {
+}
+
+table BillboardRent {
+    lease_duration: Uint64,
+}
+
+table BillboardUpdate {
+    ad_url: Bytes,
+    image_url: Bytes,
+}
+
+table BillboardWithdraw {
+}
