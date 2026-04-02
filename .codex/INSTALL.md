@@ -15,6 +15,8 @@ mkdir -p ~/.codex/skills
 ln -sf ~/.ckb-dev-skills/skill ~/.codex/skills/ckb-dev
 ln -sf ~/.ckb-dev-skills/agents ~/.codex/skills/ckb-dev/agents
 ln -sf ~/.ckb-dev-skills/shared ~/.codex/skills/ckb-dev/shared
+ln -sf ~/.ckb-dev-skills/skills ~/.codex/skills/ckb-dev/skills
+ln -sf ~/.ckb-dev-skills/commands ~/.codex/skills/ckb-dev/commands
 ```
 
 3. Verify the installation by asking Codex about CKB development.

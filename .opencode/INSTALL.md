@@ -15,6 +15,8 @@ mkdir -p ~/.opencode/skills
 ln -sf ~/.ckb-dev-skills/skill ~/.opencode/skills/ckb-dev
 ln -sf ~/.ckb-dev-skills/agents ~/.opencode/skills/ckb-dev/agents
 ln -sf ~/.ckb-dev-skills/shared ~/.opencode/skills/ckb-dev/shared
+ln -sf ~/.ckb-dev-skills/skills ~/.opencode/skills/ckb-dev/skills
+ln -sf ~/.ckb-dev-skills/commands ~/.opencode/skills/ckb-dev/commands
 ```
 
 3. Verify the installation by asking OpenCode about CKB development.
