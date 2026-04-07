@@ -92,6 +92,10 @@ Tell OpenCode:
 Fetch and follow instructions from https://raw.githubusercontent.com/gpBlockchain/ckb-dev-skills/main/.opencode/INSTALL.md
 ```
 
+### GitHub Copilot (Custom Agents)
+
+This repository includes [GitHub Copilot custom agents](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-custom-agents) in `.github/agents/`. Once merged to the default branch, the agents are automatically available in the Copilot agent picker (VS Code, JetBrains, GitHub.com).
+
 ### Gemini CLI
 
 ```bash
@@ -176,6 +180,16 @@ skills/
     ├── ckb-contract.md                # @ckb-contract — Talk to Contract Agent
     ├── ckb-dapp.md                    # @ckb-dapp — Talk to DApp Agent
     └── ckb-fiber.md                   # @ckb-fiber — Talk to Fiber Agent
+
+.github/
+└── agents/
+    ├── ckb-dev-lead.agent.md         # GitHub Copilot — Team Lead
+    ├── brainstorm.agent.md            # GitHub Copilot — Q&A project creation
+    ├── contract-design.agent.md       # GitHub Copilot — 4-phase design session
+    ├── ckb-core.agent.md              # GitHub Copilot — Core Agent
+    ├── ckb-contract.agent.md          # GitHub Copilot — Contract Agent
+    ├── ckb-dapp.agent.md              # GitHub Copilot — DApp Agent
+    └── ckb-fiber.agent.md             # GitHub Copilot — Fiber Agent
 
 shared/
 └── resources.md                      # Curated reference links

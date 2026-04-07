@@ -24,7 +24,11 @@ jobs:
             --config .lychee.toml
             --no-progress
             README.md
-            skill/
+            agents/
+            shared/
+            skills/
+            .claude/
+            .github/agents/
           fail: true
 
   markdown-format:
@@ -39,7 +43,19 @@ jobs:
           node-version: 20
 
       - name: Check Markdown formatting
-        run: npx --yes prettier@3.5.3 --check README.md skill/*.md
+        run: >-
+          npx --yes prettier@3.5.3 --check
+          README.md
+          agents/ckb-dev-lead/*.md
+          agents/ckb-core/*.md
+          agents/ckb-contract/*.md
+          agents/ckb-dapp/*.md
+          agents/ckb-fiber/*.md
+          shared/*.md
+          skills/brainstorming/*.md
+          skills/contract-design/*.md
+          .claude/agents/*.md
+          .github/agents/*.md
 
   spelling:
     runs-on: ubuntu-latest
@@ -53,4 +69,16 @@ jobs:
           node-version: 20
 
       - name: Check spelling
-        run: npx --yes cspell@8.17.5 lint --config .cspell.json README.md skill/*.md
+        run: >-
+          npx --yes cspell@8.17.5 lint --config .cspell.json
+          README.md
+          agents/ckb-dev-lead/*.md
+          agents/ckb-core/*.md
+          agents/ckb-contract/*.md
+          agents/ckb-dapp/*.md
+          agents/ckb-fiber/*.md
+          shared/*.md
+          skills/brainstorming/*.md
+          skills/contract-design/*.md
+          .claude/agents/*.md
+          .github/agents/*.md

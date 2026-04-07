@@ -5,7 +5,7 @@ CSPELL := npx --yes cspell@8.17.5
 LYCHEE_VERSION := 0.16.1
 LYCHEE_ROOT := .tools
 LYCHEE_BIN := $(LYCHEE_ROOT)/bin/lychee
-MARKDOWN_FILES := README.md agents/ckb-dev-lead/*.md agents/ckb-core/*.md agents/ckb-contract/*.md agents/ckb-dapp/*.md agents/ckb-fiber/*.md shared/*.md skills/brainstorming/*.md skills/contract-design/*.md .claude/agents/*.md
+MARKDOWN_FILES := README.md agents/ckb-dev-lead/*.md agents/ckb-core/*.md agents/ckb-contract/*.md agents/ckb-dapp/*.md agents/ckb-fiber/*.md shared/*.md skills/brainstorming/*.md skills/contract-design/*.md .claude/agents/*.md .github/agents/*.md
 
 .DEFAULT_GOAL := help
 
@@ -33,7 +33,7 @@ docs-spell:
 	$(CSPELL) lint --config .cspell.json $(MARKDOWN_FILES)
 
 docs-links: ensure-lychee
-	$(LYCHEE_BIN) --config .lychee.toml --no-progress README.md agents/ shared/ skills/ .claude/
+	$(LYCHEE_BIN) --config .lychee.toml --no-progress README.md agents/ shared/ skills/ .claude/ .github/agents/
 
 ensure-lychee:
 	@if [ ! -x "$(LYCHEE_BIN)" ] || ! "$(LYCHEE_BIN)" --version | grep -q "lychee $(LYCHEE_VERSION)"; then \
