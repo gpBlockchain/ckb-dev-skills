@@ -25,7 +25,7 @@ fi
 AGENTS_DIR=""
 SHARED_DIR=""
 SKILLS_DIR=""
-COMMANDS_DIR=""
+CUSTOM_AGENTS_DIR=""
 INSTALL_PATH="$HOME/.claude/skills/$SKILL_NAME"
 MODE="personal"
 
@@ -100,7 +100,7 @@ fi
 AGENTS_DIR="$SCRIPT_DIR/agents"
 SHARED_DIR="$SCRIPT_DIR/shared"
 SKILLS_DIR="$SCRIPT_DIR/skills"
-COMMANDS_DIR="$SCRIPT_DIR/commands"
+CUSTOM_AGENTS_DIR="$SCRIPT_DIR/.claude/agents"
 
 # Check if source directories exist
 if [ ! -d "$AGENTS_DIR" ]; then
@@ -148,9 +148,10 @@ if [ -d "$SKILLS_DIR" ]; then
     cp -r "$SKILLS_DIR" "$INSTALL_PATH/skills"
 fi
 
-# Copy commands (slash commands for agent interaction)
-if [ -d "$COMMANDS_DIR" ]; then
-    cp -r "$COMMANDS_DIR" "$INSTALL_PATH/commands"
+# Copy custom agents (agent entry points for @agent invocation)
+if [ -d "$CUSTOM_AGENTS_DIR" ]; then
+    mkdir -p "$INSTALL_PATH/.claude"
+    cp -r "$CUSTOM_AGENTS_DIR" "$INSTALL_PATH/.claude/agents"
 fi
 
 echo ""
@@ -161,16 +162,17 @@ find "$INSTALL_PATH" -type f -name "*.md" | sort | while read -r file; do
     echo "  - ${file#$INSTALL_PATH/}"
 done
 echo ""
-echo "🚀 Available commands (Claude Code slash commands):"
-echo "  /ckb-dev-lead   — Talk to the Team Lead (routes to the right agent)"
-echo "  /brainstorm     — Interactive Q&A to design a new CKB project"
-echo "  /ckb-core       — Talk to the Core Agent (Cell Model, transactions)"
-echo "  /ckb-contract   — Talk to the Contract Agent (Rust Scripts, testing)"
-echo "  /ckb-dapp       — Talk to the DApp Agent (CCC SDK, React, wallets)"
-echo "  /ckb-fiber      — Talk to the Fiber Agent (payment channels)"
+echo "🚀 Available custom agents (invoke with @agent-name in Claude Code):"
+echo "  @ckb-dev-lead     — Talk to the Team Lead (routes to the right agent)"
+echo "  @brainstorm       — Interactive Q&A to design a new CKB project"
+echo "  @contract-design  — Interactive 4-phase contract design"
+echo "  @ckb-core         — Talk to the Core Agent (Cell Model, transactions)"
+echo "  @ckb-contract     — Talk to the Contract Agent (Rust Scripts, testing)"
+echo "  @ckb-dapp         — Talk to the DApp Agent (CCC SDK, React, wallets)"
+echo "  @ckb-fiber        — Talk to the Fiber Agent (payment channels)"
 echo ""
 echo "The skill is now available in Claude Code."
-echo "Try: /brainstorm to start a new CKB project!"
+echo "Try: @brainstorm to start a new CKB project!"
 echo ""
 echo "📖 Update:    ./install.sh --update  (or re-run the curl one-liner)"
 echo "🗑️  Uninstall: ./install.sh --uninstall"

@@ -167,13 +167,15 @@ skills/
 └── contract-design/
     └── SKILL.md                      # 📐 Interactive contract design (4-phase)
 
-commands/
-├── brainstorm.md                     # /brainstorm — Q&A project creation
-├── contract-design.md                # /contract-design — 4-phase design session
-├── ckb-core.md                       # /ckb-core — Talk to Core Agent
-├── ckb-contract.md                   # /ckb-contract — Talk to Contract Agent
-├── ckb-dapp.md                       # /ckb-dapp — Talk to DApp Agent
-└── ckb-fiber.md                      # /ckb-fiber — Talk to Fiber Agent
+.claude/
+└── agents/
+    ├── ckb-dev-lead.md               # @ckb-dev-lead — Talk to Team Lead
+    ├── brainstorm.md                  # @brainstorm — Q&A project creation
+    ├── contract-design.md             # @contract-design — 4-phase design session
+    ├── ckb-core.md                    # @ckb-core — Talk to Core Agent
+    ├── ckb-contract.md                # @ckb-contract — Talk to Contract Agent
+    ├── ckb-dapp.md                    # @ckb-dapp — Talk to DApp Agent
+    └── ckb-fiber.md                   # @ckb-fiber — Talk to Fiber Agent
 
 shared/
 └── resources.md                      # Curated reference links
@@ -183,23 +185,23 @@ shared/
 
 Once installed, Claude Code will automatically use this skill when you ask about CKB development.
 
-### Slash Commands
+### Custom Agents
 
 Talk directly to specific agents or start a brainstorming session:
 
-| Command            | Description                                                        |
+| Agent              | Description                                                        |
 | ------------------ | ------------------------------------------------------------------ |
-| `/ckb-dev-lead`    | Talk to the Team Lead (routes to the right specialist agent)       |
-| `/brainstorm`      | Interactive Q&A to design a new CKB project                        |
-| `/contract-design` | Interactive 4-phase contract design with step-by-step confirmation |
-| `/ckb-core`        | Talk to the Core Agent (Cell Model, transactions)                  |
-| `/ckb-contract`    | Talk to the Contract Agent (Rust Scripts, testing)                 |
-| `/ckb-dapp`        | Talk to the DApp Agent (CCC SDK, React, wallets)                   |
-| `/ckb-fiber`       | Talk to the Fiber Agent (payment channels, Lightning)              |
+| `@ckb-dev-lead`    | Talk to the Team Lead (routes to the right specialist agent)       |
+| `@brainstorm`      | Interactive Q&A to design a new CKB project                        |
+| `@contract-design` | Interactive 4-phase contract design with step-by-step confirmation |
+| `@ckb-core`        | Talk to the Core Agent (Cell Model, transactions)                  |
+| `@ckb-contract`    | Talk to the Contract Agent (Rust Scripts, testing)                 |
+| `@ckb-dapp`        | Talk to the DApp Agent (CCC SDK, React, wallets)                   |
+| `@ckb-fiber`       | Talk to the Fiber Agent (payment channels, Lightning)              |
 
 ### Creating a New Project
 
-Use `/brainstorm` to start an interactive session. The agent will ask you questions about:
+Use `@brainstorm` to start an interactive session. The agent will ask you questions about:
 
 1. **Project type** — Script, DApp, Fiber, or Full-Stack?
 2. **Goal** — What are you building?
@@ -210,7 +212,7 @@ Then it generates a design summary for your approval before writing any code.
 
 ### Designing a Contract
 
-Before writing any contract code, use `/contract-design` to walk through the 4-phase design process:
+Before writing any contract code, use `@contract-design` to walk through the 4-phase design process:
 
 1. **Phase 1 — State Modeling**: Define your Cell types, data fields, and capacity budgets
 2. **Phase 2 — Roles & Permissions**: Choose Lock Scripts, define who can create/update/destroy each Cell

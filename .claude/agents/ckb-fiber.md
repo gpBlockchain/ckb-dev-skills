@@ -1,4 +1,5 @@
 ---
+name: ckb-fiber
 description: "Talk to the CKB Fiber Agent about payment channels, invoices, off-chain payments, and cross-chain interop."
 ---
 

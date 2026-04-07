@@ -1,4 +1,5 @@
 ---
+name: contract-design
 description: "Start an interactive contract design session. Walk through Cell modeling, permissions, state transitions, and security review — all confirmed step by step before any code is written."
 ---
 
