@@ -1,0 +1,13 @@
+[package]
+name = "red-packet-lock"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ckb-std = { version = "1.1", default-features = true, features = ["dlopen-c"] }
+ckb-hash = { version = "1.1", default-features = false, features = ["ckb-contract"] }
+red-packet-common = { path = "../../crates/red-packet-common" }
+
+[features]
+library = []
+native-simulator = ["library", "ckb-std/native-simulator"]
