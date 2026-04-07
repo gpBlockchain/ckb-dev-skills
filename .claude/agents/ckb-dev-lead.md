@@ -1,4 +1,5 @@
 ---
+name: ckb-dev-lead
 description: "Talk to the CKB Dev Team Lead. Routes your questions to the right specialist Agent (Core, Contract, DApp, Fiber), coordinates cross-domain tasks, and ensures quality."
 ---
 

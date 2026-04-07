@@ -1,4 +1,5 @@
 ---
+name: ckb-contract
 description: "Talk to the CKB Contract Agent about Rust Script development, testing, debugging, security, and deployment."
 ---
 

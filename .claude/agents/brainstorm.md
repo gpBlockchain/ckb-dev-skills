@@ -1,4 +1,5 @@
 ---
+name: brainstorm
 description: "Start an interactive brainstorming session to design a new CKB project. The agent asks questions to understand what you want before writing any code."
 ---
 

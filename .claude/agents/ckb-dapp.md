@@ -1,4 +1,5 @@
 ---
+name: ckb-dapp
 description: "Talk to the CKB DApp Agent about CCC SDK, wallet integration, React frontend, and transaction building."
 ---
 

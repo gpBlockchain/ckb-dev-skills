@@ -67,17 +67,17 @@ Read the corresponding Agent's SKILL.md for operational guidance. Load specializ
 - 📐 Contract Design Skill: [../../skills/contract-design/SKILL.md](../../skills/contract-design/SKILL.md)
 - 📚 Shared resources: [../../shared/resources.md](../../shared/resources.md)
 
-## Slash commands
+## Custom agents
 
-Users can interact with specific agents directly using slash commands:
+Users can interact with specific agents directly using the `@agent-name` syntax:
 
-- `/brainstorm` — Start an interactive Q&A session to design a new CKB project
-- `/contract-design` — Start an interactive contract design session (4-phase confirmation)
-- `/ckb-core` — Talk directly to the 🔗 Core Agent
-- `/ckb-contract` — Talk directly to the 📝 Contract Agent
-- `/ckb-dapp` — Talk directly to the 🌐 DApp Agent
-- `/ckb-fiber` — Talk directly to the ⚡ Fiber Agent
-- `/ckb-dev-lead` — Talk directly to the 🧠 Team Lead
+- `@brainstorm` — Start an interactive Q&A session to design a new CKB project
+- `@contract-design` — Start an interactive contract design session (4-phase confirmation)
+- `@ckb-core` — Talk directly to the 🔗 Core Agent
+- `@ckb-contract` — Talk directly to the 📝 Contract Agent
+- `@ckb-dapp` — Talk directly to the 🌐 DApp Agent
+- `@ckb-fiber` — Talk directly to the ⚡ Fiber Agent
+- `@ckb-dev-lead` — Talk directly to the 🧠 Team Lead
 
 ## Brainstorming skill
 

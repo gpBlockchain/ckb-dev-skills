@@ -3,7 +3,7 @@
   "version": "0.2",
   "language": "en",
   "dictionaries": ["softwareTerms"],
-  "files": ["README.md", "skill/*.md", "agents/**/*.md", "shared/*.md", "skills/**/*.md", "commands/*.md"],
+  "files": ["README.md", "skill/*.md", "agents/**/*.md", "shared/*.md", "skills/**/*.md", ".claude/agents/*.md"],
   "ignorePaths": [".git", "LICENSE"],
   "ignoreRegExpList": [
     "/0x[0-9a-fA-F]+/g",

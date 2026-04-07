@@ -1,4 +1,5 @@
 ---
+name: ckb-core
 description: "Talk to the CKB Core Agent about Cell Model, transaction structure, CKB-VM, and CKB fundamentals."
 ---
 
